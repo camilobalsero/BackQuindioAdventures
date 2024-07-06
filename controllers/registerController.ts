@@ -1,6 +1,7 @@
 import User from '../Dto/UserDto';
 import { Request, Response } from "express";
 import UserService from '../services/Userservice';
+import mailerService from '../services/mailerService';
 
 
 let register = async (req: Request, res: Response) => {
@@ -20,6 +21,22 @@ let register = async (req: Request, res: Response) => {
     await UserService.register(user)
     await UserService.registerTelefono(user);
     await UserService.registerDireccion(user);
+
+    try {
+      await mailerService.sendEmail(
+        email,
+        "Registro exitoso ✔",
+        `Hola ${name}, bienvenido a nuestro servicio!`,
+        `Hola ${name}, Bienvenido a nuestro serviciosssssssssssssssssss de QuindioAdventures`
+      );
+    } catch (error) {
+      console.error("Error sending welcome email:", error);
+    }
+
+  return res.status(201).send(
+      {status: 'register ok', password_hasheado: password}
+  );
+
     return res.status(201).send(
       { status: 'register ok'}
     );
