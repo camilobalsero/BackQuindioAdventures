@@ -2,12 +2,15 @@ import express from "express"
 import bodyParser from "body-parser"
 import register from './routes/register'
 import auth from "./routes/auth";
+import reserva from "./routes/reserva";
+import validateToken from "./middleware/validateToken";
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/register', register);
 app.use('/auth', auth);
+app.use('/reserva',validateToken, reserva)
 
 const PORT = process.env.PORT || 10101;
 

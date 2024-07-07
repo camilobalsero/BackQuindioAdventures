@@ -2,6 +2,7 @@ import UserRepository from '../repositories/UserRepository';
 import User from '../Dto/UserDto';
 import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
+import Reserva from '../Dto/reservesDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {
@@ -31,6 +32,21 @@ class UserService {
             return{logged: false, status: "Incorrect username or password"}
     }
 
+    static async crearReserva(reserva: Reserva) {
+        console.log(2222222);
+        
+        try {
+            const result: any = await UserRepository.addReserva(reserva);
+            console.log("Resultado de la consulta SQL:", result);
+            
+            if (result.affectedRows > 0) { // Usamos affectedRows para verificar inserción exitosa
+                return { logged: true, status: "Reserva registrada" };
+            }
+            return { logged: false, status: "Fallo al realizar la reserva" };
+        } catch (error) {
+            console.error("Error en UserService.crearReserva:", error);
+            throw error;
+        }
+    }
 }
-
 export default UserService;
