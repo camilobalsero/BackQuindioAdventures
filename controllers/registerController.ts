@@ -7,14 +7,14 @@ import mailerService from '../services/mailerService';
 let register = async (req: Request, res: Response) => {
   try {
     const {
-      name,
-      lastName,
-      phoneNumber,
+      address,
       age,
       document,
-      address,
       email,
+      lastName,
+      name,
       password,
+      phoneNumber
     } = req.body;
 
     let user: User = new User(document, email, password, name, lastName, age, phoneNumber, address);
