@@ -63,6 +63,12 @@ class UserRepository {
             throw error;
         }
     }
+    
+    static async resetPassword(email: string, newPasswordHash: string) {
+        const sql = 'UPDATE usuario SET password = ? WHERE email = ?';
+        const values = [newPasswordHash, email];
+        return db.execute(sql, values);
+    }
 
     
 }
