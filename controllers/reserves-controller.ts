@@ -7,7 +7,8 @@ let reserva = async (req: Request, res: Response) => {
         const {
             documento,
             precio,
-            cantPersonas,
+            cantNinos,
+            cantAdultos,
             estancia,
             fechaInicio,
             fechaFin
@@ -16,7 +17,7 @@ let reserva = async (req: Request, res: Response) => {
         console.log("Datos recibidos en el cuerpo de la solicitud:", req.body);
 
         // Validar que todos los campos están presentes
-        if (!documento || !precio || !cantPersonas || !estancia || !fechaInicio || !fechaFin) {
+        if (!documento || !precio || !cantNinos || !cantAdultos || !estancia || !fechaInicio || !fechaFin) {
             return res.status(400).json({ 
                 status: 'Datos incompletos en la solicitud'
             });
@@ -39,7 +40,7 @@ let reserva = async (req: Request, res: Response) => {
             });
         }
 
-        const nuevaReserva = new Reserva(documento, precio, cantPersonas, estancia, fechaInicioObj, fechaFinObj);
+        const nuevaReserva = new Reserva(documento, precio, cantNinos, cantAdultos , estancia, fechaInicioObj, fechaFinObj);
 
         console.log("Nueva reserva creada:", nuevaReserva);
 

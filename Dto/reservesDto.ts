@@ -1,15 +1,18 @@
 class Reserva {
+    [x: string]: any;
     private _documento: string;
     private _precio: number;
-    private _cantPersonas: number;
+    private _cantNinos: number;
+    private _cantAdultos: number;
     private _estancia: number;
     private _fechaInicio: Date;
     private _fechaFin: Date;
 
-    constructor(documento: string, precio: number, cantPersonas: number, estancia: number, fechaInicio: Date, fechaFin: Date) {
+    constructor(documento: string, precio: number, cantNinos: number, cantAdultos: number ,estancia: number, fechaInicio: Date, fechaFin: Date) {
         this._documento = documento;
         this._precio = precio;
-        this._cantPersonas = cantPersonas;
+        this._cantNinos = cantNinos;
+        this._cantAdultos = cantAdultos;
         this._estancia = estancia;
         this._fechaInicio = fechaInicio;
         this._fechaFin = fechaFin;
@@ -23,8 +26,12 @@ class Reserva {
         return this._precio;
     }
 
-    get cantPersonas(): number {
-        return this._cantPersonas;
+    get cantNinos(): number {
+        return this._cantNinos;
+    }
+
+    get cantAdultos(): number {
+        return this._cantAdultos;
     }
 
     get estancia(): number {
@@ -47,8 +54,12 @@ class Reserva {
         this._precio = precio;
     }
 
-    set cantPersonas(cantPersonas: number) {
-        this._cantPersonas = cantPersonas;
+    set cantNinos(cantNinos: number) {
+        this._cantNinos = cantNinos;
+    }
+
+    set cantAdultos(cantAdultos: number) {
+        this._cantAdultos = cantAdultos;
     }
 
     set estancia(estancia: number) {

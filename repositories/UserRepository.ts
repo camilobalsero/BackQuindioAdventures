@@ -40,11 +40,12 @@ class UserRepository {
     static async addReserva(reservesDto: Reserva) {
         console.log(3333333333);
         
-        const sql = 'INSERT INTO reserva (documento_usuario, precio, cantidad_personas, estancia, fecha_inicio, fecha_fin, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO reserva (documento_usuario, precio, cantidad_ninos, cantidad_adultos, estancia, fecha_inicio, fecha_fin, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [
             reservesDto.documento,
             reservesDto.precio,
-            reservesDto.cantPersonas,
+            reservesDto.cantNinos,
+            reservesDto.cantAdultos,
             reservesDto.estancia,
             reservesDto.fechaInicio,
             reservesDto.fechaFin,
@@ -62,6 +63,12 @@ class UserRepository {
             console.error("Error en la ejecución de la consulta:", error);
             throw error;
         }
+    }
+    
+    static async resetPassword(email: string, newPasswordHash: string) {
+        const sql = 'UPDATE usuario SET password = ? WHERE email = ?';
+        const values = [newPasswordHash, email];
+        return db.execute(sql, values);
     }
 
     
