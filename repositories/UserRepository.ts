@@ -40,9 +40,7 @@ class UserRepository {
 
 
     static async addReserva(reservesDto: Reserva) {
-        console.log(3333333333);
-        
-        const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre,fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)';
         const values = [
             reservesDto.documento,
             reservesDto.cantNinos,

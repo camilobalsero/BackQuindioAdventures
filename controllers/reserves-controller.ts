@@ -39,7 +39,7 @@ let reserva = async (req: Request, res: Response) => {
             });
         }
 
-        const nuevaReserva = new Reserva(documento, nombre, cantNinos, cantAdultos , fechaInicioObj, fechaFinObj);
+        const nuevaReserva = new Reserva(nombre, documento, cantNinos, cantAdultos , fechaInicioObj, fechaFinObj);
 
         console.log("Nueva reserva creada:", nuevaReserva);
 
