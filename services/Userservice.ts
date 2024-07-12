@@ -32,6 +32,7 @@ class UserService {
             return{logged: false, status: "Incorrect username or password"}
     }
 
+
     static async crearReserva(reserva: Reserva) {
         console.log(2222222);
         
@@ -48,5 +49,6 @@ class UserService {
             throw error;
         }
     }
+
 }
 export default UserService;

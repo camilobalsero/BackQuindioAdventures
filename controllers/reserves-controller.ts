@@ -5,23 +5,22 @@ import Reserva from "../Dto/reservesDto";
 let reserva = async (req: Request, res: Response) => {
     try {
         const {
-            documento,
-            precio,
-            cantNinos,
             cantAdultos,
-            estancia,
+            cantNinos,
             fechaInicio,
-            fechaFin
+            fechaFin,
+            documento,
+            nombre,
         } = req.body;
 
         console.log("Datos recibidos en el cuerpo de la solicitud:", req.body);
 
         // Validar que todos los campos están presentes
-        if (!documento || !precio || !cantNinos || !cantAdultos || !estancia || !fechaInicio || !fechaFin) {
+        if ( !cantAdultos || !cantNinos  || !fechaInicio || !fechaFin || !documento || !nombre) {
             return res.status(400).json({ 
                 status: 'Datos incompletos en la solicitud'
             });
-        }
+        }        
 
         // Convertir strings a objetos de tipo Date
         const fechaInicioObj = new Date(fechaInicio);
@@ -40,7 +39,7 @@ let reserva = async (req: Request, res: Response) => {
             });
         }
 
-        const nuevaReserva = new Reserva(documento, precio, cantNinos, cantAdultos , estancia, fechaInicioObj, fechaFinObj);
+        const nuevaReserva = new Reserva(documento, nombre, cantNinos, cantAdultos , fechaInicioObj, fechaFinObj);
 
         console.log("Nueva reserva creada:", nuevaReserva);
 

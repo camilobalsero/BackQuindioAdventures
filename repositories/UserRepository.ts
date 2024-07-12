@@ -37,18 +37,19 @@ class UserRepository {
         return db.execute(sql,values)
     }
 
+
+
     static async addReserva(reservesDto: Reserva) {
         console.log(3333333333);
         
-        const sql = 'INSERT INTO reserva (documento_usuario, precio, cantidad_ninos, cantidad_adultos, estancia, fecha_inicio, fecha_fin, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';
         const values = [
             reservesDto.documento,
-            reservesDto.precio,
             reservesDto.cantNinos,
             reservesDto.cantAdultos,
-            reservesDto.estancia,
             reservesDto.fechaInicio,
             reservesDto.fechaFin,
+            reservesDto.nombre,
             new Date()
         ];
         
@@ -64,6 +65,7 @@ class UserRepository {
             throw error;
         }
     }
+
     
     static async resetPassword(email: string, newPasswordHash: string) {
         const sql = 'UPDATE usuario SET password = ? WHERE email = ?';
