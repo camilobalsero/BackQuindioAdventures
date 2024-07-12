@@ -2,9 +2,14 @@ import express from "express"
 import bodyParser from "body-parser"
 import register from './routes/register'
 import auth from "./routes/auth";
+import cors from "cors"
 
 const app = express().use(bodyParser.json());
-app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Configuración de CORS
+app.use(cors());
 
 app.use('/register', register);
 app.use('/auth', auth);
