@@ -3,6 +3,8 @@ import bodyParser from "body-parser"
 import register from './routes/register'
 import auth from "./routes/auth";
 import reserva from "./routes/reserva";
+import createChalet from "./routes/createChalet";
+
 import validateToken from "./middleware/validateToken";
 import cors from "cors";
 
@@ -12,6 +14,7 @@ app.use(cors())
 app.use('/register', register);
 app.use('/auth', auth);
 app.use('/reserva',validateToken, reserva)
+app.use('/createChalet', validateToken, createChalet );
 
 const PORT = process.env.PORT || 10101;
 

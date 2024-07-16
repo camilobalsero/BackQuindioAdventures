@@ -3,6 +3,7 @@ import User from '../Dto/UserDto';
 import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
 import Reserva from '../Dto/reservesDto';
+import Chalet from '../Dto/ChaletDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {
@@ -32,6 +33,20 @@ class UserService {
             return{logged: false, status: "Incorrect username or password"}
     }
 
+    static async addChalet(chalet: Chalet) {
+        try {
+            const result: any = await UserRepository.addChalet(chalet);
+            console.log("Resultado de la consulta SQL:", result);
+
+            if (result.affectedRows > 0) {
+                return { logged: true, status: "Chalet registrado" };
+            }
+            return { logged: false, status: "Fallo al registrar el chalet" };
+        } catch (error) {
+            console.error("Error en UserService.addChalet:", error);
+            throw error;
+        }
+    }
 
     static async crearReserva(reserva: Reserva) {
         console.log(2222222);

@@ -1,5 +1,6 @@
 import db from '../config/config-db';
 import Auth from '../Dto/AuthDto';
+import Chalet from '../Dto/ChaletDto';
 import Reserva from '../Dto/reservesDto';
 import User from '../Dto/UserDto';
 
@@ -37,7 +38,27 @@ class UserRepository {
         return db.execute(sql,values)
     }
 
+    static async addChalet(chalet: Chalet) {
+        const sql = 'INSERT INTO chalet (nombre_chalet, ubicacion_chalet, capacidad, caracteristicas) VALUES (?, ?, ?, ?)';
+        const values = [
+            chalet.nombreChalet,
+            chalet.ubicacionChalet,
+            chalet.capacidad,
+            chalet.caracteristicas
+        ];
 
+        console.log("SQL Query: ", sql);
+        console.log("Values: ", values);
+
+        try {
+            const [result] = await db.execute(sql, values);
+            console.log("Resultado de la ejecución de la consulta:", result);
+            return result;
+        } catch (error) {
+            console.error("Error en la ejecución de la consulta:", error);
+            throw error;
+        }
+    }
 
     static async addReserva(reservesDto: Reserva) {
         console.log(3333333333);
