@@ -35,18 +35,23 @@ class UserService {
 
     static async addChalet(chalet: Chalet) {
         try {
-            const result: any = await UserRepository.addChalet(chalet);
-            console.log("Resultado de la consulta SQL:", result);
+            // Insertar el chalet en la tabla chalet
+            const chaletId = await UserRepository.addChalet(chalet);
 
-            if (result.affectedRows > 0) {
-                return { logged: true, status: "Chalet registrado" };
+            // Asegurarse de que el chalet se insertó correctamente
+            if (chaletId) {
+                // Insertar las imágenes en la tabla chalet_images usando el id_chalet
+                await UserRepository.addImagenes(chaletId, chalet);
+                return { logged: true, status: "Chalet registrado con imágenes" };
+            } else {
+                return { logged: false, status: "Fallo al registrar el chalet" };
             }
-            return { logged: false, status: "Fallo al registrar el chalet" };
         } catch (error) {
             console.error("Error en UserService.addChalet:", error);
             throw error;
         }
     }
+    
 
     static async crearReserva(reserva: Reserva) {
         console.log(2222222);

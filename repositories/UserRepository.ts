@@ -47,19 +47,30 @@ class UserRepository {
             chalet.caracteristicas
         ];
 
-        console.log("SQL Query: ", sql);
-        console.log("Values: ", values);
-
         try {
-            const [result] = await db.execute(sql, values);
-            console.log("Resultado de la ejecución de la consulta:", result);
-            return result;
+            const [result]: any = await db.execute(sql, values);
+            const chaletId = result.insertId;  // Obtener el ID del chalet insertado
+            return chaletId;
         } catch (error) {
             console.error("Error en la ejecución de la consulta:", error);
             throw error;
         }
     }
 
+    static async addImagenes(chaletId: number, chalet: Chalet) {
+        const sql = 'INSERT INTO chalet_images (id_chalet, imagen1, imagen2, imagen3, imagen4) VALUES (?, ?, ?, ?, ?)';
+        const values = [
+            chaletId,
+            chalet.imagen1,
+            chalet.imagen2,
+            chalet.imagen3,
+            chalet.imagen4
+        ];
+
+        return db.execute(sql, values);
+    }
+
+    
     static async addReserva(reservesDto: Reserva) {
         console.log(3333333333);
         
