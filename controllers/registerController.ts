@@ -14,13 +14,15 @@ let register = async (req: Request, res: Response) => {
       document,
       address,
       email,
-      password,
+      password
     } = req.body;
 
     let user: User = new User(document, email, password, name, lastName, age, phoneNumber, address);
     await UserService.register(user)
     await UserService.registerTelefono(user);
     await UserService.registerDireccion(user);
+
+    
 
     try {
       await mailerService.sendEmail(

@@ -3,6 +3,8 @@ import Auth from '../Dto/AuthDto';
 import Chalet from '../Dto/ChaletDto';
 import Reserva from '../Dto/reservesDto';
 import User from '../Dto/UserDto';
+import Tarifa from '../Dto/TarifasDto';
+import Imagenes from '../Dto/ImagenesDto';
 
 class UserRepository {
 
@@ -56,24 +58,30 @@ class UserRepository {
             throw error;
         }
     }
-
-    static async addImagenes(chaletId: number, chalet: Chalet) {
-        const sql = 'INSERT INTO chalet_images (id_chalet, imagen1, imagen2, imagen3, imagen4) VALUES (?, ?, ?, ?, ?)';
+    
+    static async addTarifa(chaletId: number, tarifa: Tarifa ) {
+        const sql = 'INSERT INTO TarifasChalet (id_chalet_usuario, precio, tipo_habitacion, temporada) VALUES (?, ?, ?, ?)'
         const values = [
             chaletId,
-            chalet.imagen1,
-            chalet.imagen2,
-            chalet.imagen3,
-            chalet.imagen4
+            tarifa.precio,
+            tarifa.tipo_habitacion,
+            tarifa.temporada
+        ];
+
+        return db.execute(sql,values);
+    }
+
+    static async addChaletImage(chaletId: number ,imagenes: Imagenes) {
+        const sql = 'INSERT INTO chalet_images (id_chalet, image) VALUES (?, ?)';
+        const values = [
+            chaletId,
+            imagenes.image
         ];
 
         return db.execute(sql, values);
     }
 
-    
     static async addReserva(reservesDto: Reserva) {
-        console.log(3333333333);
-        
         const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';
         const values = [
             reservesDto.documento,

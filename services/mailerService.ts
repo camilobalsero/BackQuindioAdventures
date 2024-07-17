@@ -1,6 +1,5 @@
 // src/services/mailerService.ts
 import transporter from "../config/mailer";
-import User from "../Dto/UserDto"
 class mailerService {
     static async sendEmail(to: string, subject: string, text: string, html: string) {
       try {

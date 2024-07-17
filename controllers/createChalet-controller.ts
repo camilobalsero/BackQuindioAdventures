@@ -3,43 +3,54 @@ import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
 import UserService from '../services/Userservice';
+import Tarifa from '../Dto/TarifasDto';
+import Imagenes from '../Dto/ImagenesDto';
 
-const crearReserva = async (req: Request, res: Response) => {
+const crearChalet = async (req: Request, res: Response) => {
     try {
         const {
             nombre_chalet,
             ubicacion_chalet,
             capacidad,
             caracteristicas,
-            imagen1,
-            imagen2,
-            imagen3,
-            imagen4
+            tarifas,
+            imagenes
         } = req.body;
 
         // Recupera el email del usuario autenticado
         const email = res.locals.user.email;
 
-        let chalet: Chalet = new Chalet(nombre_chalet, ubicacion_chalet, capacidad, caracteristicas, imagen1, imagen2, imagen3, imagen4);
-        const result = await UserService.addChalet(chalet);
+        // Crear el objeto del chalet
+        let chalet: Chalet = new Chalet(nombre_chalet, ubicacion_chalet, capacidad, caracteristicas);
 
-        if (result.status === "Chalet registrado con imágenes") {
-            try {
-                await mailerService.sendEmail(
-                    email,
-                    "Haz registrado tu chalet exitosamente ✔",
-                    `Hola, bienvenido a nuestro servicio!`,
-                    `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
-                );
-            } catch (error) {
-                console.error("Error enviando el correo de bienvenida:", error);
+        try {
+            // Insertar el chalet en la base de datos
+            const chaletId = await UserService.addChalet(chalet);
+
+            // Insertar las tarifas asociadas al chalet
+            for (const tarifa of tarifas) {
+                let newTarifa: Tarifa = new Tarifa(chaletId, tarifa.precio, tarifa.tipo_habitacion, tarifa.temporada);
+                await UserService.addTarifa(newTarifa);
             }
 
-            return res.status(201).send(
-                { status: 'Chalet registrado exitosamente' }
+            // Insertar las imágenes asociadas al chalet
+            for (const imagen of imagenes) {
+                let newImagen: Imagenes = new Imagenes(chaletId, imagen.image);
+                await UserService.addChaletImage(newImagen);
+            }
+
+            // Enviar correo de confirmación
+            await mailerService.sendEmail(
+                email,
+                "Haz registrado tu chalet exitosamente ✔",
+                `Hola, bienvenido a nuestro servicio!`,
+                `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
             );
-        } else {
-            return res.status(500).send({ status: 'Fallo al registrar el chalet' });
+
+            return res.status(201).send({ status: 'Chalet registrado exitosamente' });
+        } catch (error) {
+            console.error("Error al registrar el chalet:", error);
+            return res.status(500).send({ error: 'Error interno del servidor' });
         }
 
     } catch (error: any) {
@@ -51,4 +62,4 @@ const crearReserva = async (req: Request, res: Response) => {
     }
 }
 
-export default [validateToken, crearReserva];
+export default [validateToken, crearChalet];

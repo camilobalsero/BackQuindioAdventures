@@ -4,6 +4,8 @@ import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
 import Reserva from '../Dto/reservesDto';
 import Chalet from '../Dto/ChaletDto';
+import Tarifa from '../Dto/TarifasDto';
+import Imagenes from '../Dto/ImagenesDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {
@@ -34,28 +36,18 @@ class UserService {
     }
 
     static async addChalet(chalet: Chalet) {
-        try {
-            // Insertar el chalet en la tabla chalet
-            const chaletId = await UserRepository.addChalet(chalet);
-
-            // Asegurarse de que el chalet se insertó correctamente
-            if (chaletId) {
-                // Insertar las imágenes en la tabla chalet_images usando el id_chalet
-                await UserRepository.addImagenes(chaletId, chalet);
-                return { logged: true, status: "Chalet registrado con imágenes" };
-            } else {
-                return { logged: false, status: "Fallo al registrar el chalet" };
-            }
-        } catch (error) {
-            console.error("Error en UserService.addChalet:", error);
-            throw error;
-        }
+        return await UserRepository.addChalet(chalet);
     }
-    
+
+    static async addTarifa(tarifa: Tarifa) {
+        return await UserRepository.addTarifa(tarifa._id_chalet_usuario, tarifa);
+    }
+
+    static async addChaletImage(imagenes: Imagenes) {
+        return await UserRepository.addChaletImage(imagenes._id_chalet, imagenes);
+    }
 
     static async crearReserva(reserva: Reserva) {
-        console.log(2222222);
-        
         try {
             const result: any = await UserRepository.addReserva(reserva);
             console.log("Resultado de la consulta SQL:", result);

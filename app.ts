@@ -13,8 +13,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors())
 app.use('/register', register);
 app.use('/auth', auth);
-app.use('/reserva',validateToken, reserva)
-app.use('/createChalet', validateToken, createChalet );
+app.use('/reserva', reserva)
+app.use('/createChalet', createChalet );
 
 const PORT = process.env.PORT || 10101;
 

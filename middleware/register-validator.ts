@@ -9,15 +9,7 @@ export let validatorParams = [
     check('document').isLength({ min: 10, max: 10 }).isString(),
     check('address').isLength({ min: 1 }).isString(), // Ajustado el min length para no estar vacío
     check('email').isEmail(),
-    check('password').isLength({ min: 8, max: 15 }),
-    check('confirmPassword')
-        .isLength({ min: 8, max: 15 })
-        .custom((value, { req }) => {
-            if (value !== req.body.password) {
-                throw new Error('Password confirmation does not match password');
-            }
-            return true;
-        }),
+    check('password').isLength({ min: 8, max: 15 })
 ];
 
 export function validator(req: Request, res: Response, next: NextFunction) {
