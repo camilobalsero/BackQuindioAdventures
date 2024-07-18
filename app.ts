@@ -4,10 +4,13 @@ import register from './routes/register'
 import auth from "./routes/auth";
 import reserva from "./routes/reserva";
 import validateToken from "./middleware/validateToken";
-import reestablecer from "./controllers/reestablecerPassword-controller";
+import reestablecer from "./routes/reestablecer";
+import cors from "cors";
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({extended: false}));
+
+app.use(cors())
 
 app.use('/register', register);
 app.use('/auth', auth);

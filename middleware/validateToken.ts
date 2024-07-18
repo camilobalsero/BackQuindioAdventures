@@ -8,7 +8,10 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
         const bearerToken = headerToken.slice(7);
         try {
             const tokenValido = await jwt.verify(bearerToken, process.env.SECRET_KEY || 'camilo');
+            
             res.locals.user = tokenValido;
+            console.log(res.locals.user, tokenValido);
+            
             next();
         } catch (error) {
             res.status(400).json({

@@ -2,7 +2,6 @@ import { check, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 
 export let validatorParams = [
-    check('email').isEmail(),
     check('password').isLength({ min: 8, max: 15 }),
     check('confirmPassword')
         .isLength({ min: 8, max: 15 })

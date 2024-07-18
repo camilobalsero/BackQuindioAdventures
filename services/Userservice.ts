@@ -33,7 +33,6 @@ class UserService {
     }
 
     static async crearReserva(reserva: Reserva) {
-        console.log(2222222);
         
         try {
             const result: any = await UserRepository.addReserva(reserva);

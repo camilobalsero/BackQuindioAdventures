@@ -5,7 +5,10 @@ import UserService from "../services/Userservice";
 
 const reestablecer = async (req:Request, res: Response)=>{
     try {
-        const {email, newPassword, confirmPassword} = req.body;
+        const {newPassword, confirmPassword} = req.body;
+        
+        const email = res.locals.user.email;
+        
             if (newPassword !== confirmPassword) {
                 return res.status(400).json(
                     { message: "Nueva contraseña y contraseña de confirmación no coinciden." }
