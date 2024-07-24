@@ -3,8 +3,8 @@ import Auth from '../Dto/AuthDto';
 import Chalet from '../Dto/ChaletDto';
 import Reserva from '../Dto/reservesDto';
 import User from '../Dto/UserDto';
-import Tarifa from '../Dto/TarifasDto';
-import Imagenes from '../Dto/ImagenesDto';
+import Tarifa from '../Dto/TarifasChaletDto';
+import Imagenes from '../Dto/ImagenesChaletDto';
 
 class UserRepository {
 

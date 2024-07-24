@@ -4,8 +4,8 @@ import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
 import Reserva from '../Dto/reservesDto';
 import Chalet from '../Dto/ChaletDto';
-import Tarifa from '../Dto/TarifasDto';
-import Imagenes from '../Dto/ImagenesDto';
+import Tarifa from '../Dto/TarifasChaletDto';
+import Imagenes from '../Dto/ImagenesChaletDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {

@@ -3,8 +3,8 @@ import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
 import UserService from '../services/Userservice';
-import Tarifa from '../Dto/TarifasDto';
-import Imagenes from '../Dto/ImagenesDto';
+import Tarifa from '../Dto/TarifasChaletDto';
+import Imagenes from '../Dto/ImagenesChaletDto';
 
 const crearChalet = async (req: Request, res: Response) => {
     try {
