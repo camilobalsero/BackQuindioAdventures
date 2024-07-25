@@ -62,6 +62,20 @@ class UserService {
             throw new Error("Error al cambiar la contraseña");
         }
     }
-    
+
+    static async getUserByEmail(email: string): Promise<User> {
+        try {
+            const result = await UserRepository.getUserByEmail(email); 
+            if (result.length > 0) {
+                return result[0];
+            } else {
+                throw new Error('Usuario no encontrado');
+            }
+        } catch (error) {
+            console.error("Error en UserService.getUserByEmail:", error);
+            throw error;
+        }
+    }
+
 }
 export default UserService;

@@ -70,7 +70,17 @@ class UserRepository {
         return db.execute(sql, values);
     }
 
-    
+    static async getUserByEmail(email: string): Promise<User[]> {
+        const sql = 'SELECT documento, email, nombres, apellidos, edad FROM usuario WHERE email = ?';
+        const values = [email];
+        try {
+            const [rows] = await db.execute(sql, values);
+            return rows as User[];
+        } catch (error) {
+            console.error("Error en UserRepository.getUserByEmail:", error);
+            throw error;
+        }
+    }
 }
 
 
