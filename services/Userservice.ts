@@ -77,5 +77,20 @@ class UserService {
         }
     }
 
+    static async updateDireccion(user: User) {
+        return await UserRepository.updateDireccion(user);
+    }
+
+    static async updateTelefono(user: User) {
+        return await UserRepository.updateTelefono(user);
+    }
+
+    static async updateUserProfile(user: User) {
+        if (user.password) {
+            user.password = await generateHash(user.password);
+        }
+        return await UserRepository.updateUser(user);
+    }
+
 }
 export default UserService;

@@ -81,6 +81,24 @@ class UserRepository {
             throw error;
         }
     }
+
+    static async updateUser(user: User) {
+        const sql = 'UPDATE usuario SET nombres = ?, apellidos = ?, edad = ?, password = ? WHERE email = ?';
+        const values = [user.nombres, user.apellidos, user.edad, user.password, user.email];
+        return db.execute(sql, values);
+    }
+
+    static async updateTelefono(user: User) {
+        const sql = 'UPDATE telefonoUsuario SET numero_telefono1 = ? WHERE documento_usuario = ?';
+        const values = [user.telefono, user.documento];
+        return db.execute(sql, values);
+    }
+
+    static async updateDireccion(user: User) {
+        const sql = 'UPDATE direccionUsuario SET direccion_usuario1 = ? WHERE documento_usuario = ?';
+        const values = [user.direccion, user.documento];
+        return db.execute(sql, values);
+    }
 }
 
 
