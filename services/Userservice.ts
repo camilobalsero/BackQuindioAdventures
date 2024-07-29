@@ -3,19 +3,14 @@ import User from '../Dto/UserDto';
 import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
 import Reserva from '../Dto/reservesDto';
+import UpdateUser from '../Dto/UpdateUserDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {
-    static async registerDireccion(user : User) {
-        return await UserRepository.addDirecciones(user)
-    }
-    static async registerTelefono(user:User) {
-        return await UserRepository.addTelefono(user);
-    }
     
     static async register(user: User) {
         user.password = await generateHash(user.password);
-        return  await UserRepository.add(user);
+        return await UserRepository.add(user);
     }
 
     static async auth(auth: Auth){
@@ -77,18 +72,7 @@ class UserService {
         }
     }
 
-    static async updateDireccion(user: User) {
-        return await UserRepository.updateDireccion(user);
-    }
-
-    static async updateTelefono(user: User) {
-        return await UserRepository.updateTelefono(user);
-    }
-
-    static async updateUserProfile(user: User) {
-        if (user.password) {
-            user.password = await generateHash(user.password);
-        }
+    static async updateUserProfile(user: UpdateUser) {
         return await UserRepository.updateUser(user);
     }
 

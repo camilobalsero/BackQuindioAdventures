@@ -1,4 +1,4 @@
-import User from '../Dto/UserDto';
+import UpdateUser from '../Dto/UpdateUserDto';
 import { Request, Response } from "express";
 import UserService from '../services/Userservice';
 import mailerService from '../services/mailerService';
@@ -10,16 +10,16 @@ let actualizarPerfil = async (req: Request, res: Response) => {
             lastName,
             phoneNumber,
             age,
-            document,
-            address,
-            password } = req.body;
-        const email = res.locals.user.email; 
-
-        let user: User = new User(document, email, password, name, lastName, age, phoneNumber, address);
+            address
+        } = req.body;  
         
-        await UserService.updateUserProfile(user); 
-        await UserService.updateTelefono(user);
-        await UserService.updateDireccion(user);
+    
+
+        const email = res.locals.user.email;
+        
+        let updateUser: UpdateUser = new UpdateUser(email, name, lastName, age, phoneNumber, address, );
+        
+        await UserService.updateUserProfile(updateUser); 
 
         try {
             await mailerService.sendEmail(
