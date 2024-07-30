@@ -3,8 +3,8 @@ import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
 import UserService from '../services/Userservice';
-import Tarifa from '../Dto/TarifasChaletDto';
-import Imagenes from '../Dto/ImagenesChaletDto';
+import Tarifa from '../Dto/TarifasDto';
+import ChaletImages from '../Dto/ImagenesDto';
 
 const crearChalet = async (req: Request, res: Response) => {
     try {
@@ -35,7 +35,7 @@ const crearChalet = async (req: Request, res: Response) => {
 
             // Insertar las imágenes asociadas al chalet
             for (const imagen of imagenes) {
-                let newImagen: Imagenes = new Imagenes(chaletId, imagen.image);
+                let newImagen: ChaletImages = new ChaletImages(chaletId, imagen.image);
                 await UserService.addChaletImage(newImagen);
             }
 

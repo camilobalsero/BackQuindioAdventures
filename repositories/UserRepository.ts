@@ -1,6 +1,9 @@
 import db from '../config/config-db';
 import Auth from '../Dto/AuthDto';
+import Chalet from '../Dto/ChaletDto';
+import ChaletImages from '../Dto/ImagenesDto';
 import Reserva from '../Dto/reservesDto';
+import Tarifa from '../Dto/TarifasDto';
 import UpdateUser from '../Dto/UpdateUserDto';
 import User from '../Dto/UserDto';
 
@@ -68,7 +71,48 @@ class UserRepository {
         const values = [user.nombres, user.apellidos, user.edad, user.telefono, user.direccion, user.email];
         console.log(db.execute(sql,values));
         return db.execute(sql, values);
-    }    
+    }
+
+    static async addChalet(chalet: Chalet) {
+        const sql = 'INSERT INTO chalet (nombre_chalet, ubicacion_chalet, capacidad, caracteristicas) VALUES (?, ?, ?, ?)';
+        const values = [
+            chalet.nombreChalet,
+            chalet.ubicacionChalet,
+            chalet.capacidad,
+            chalet.caracteristicas
+        ];
+
+        try {
+            const [result]: any = await db.execute(sql, values);
+            const chaletId = result.insertId;  // Obtener el ID del chalet insertado
+            return chaletId;
+        } catch (error) {
+            console.error("Error en la ejecución de la consulta:", error);
+            throw error;
+        }
+    }
+    
+    static async addTarifa(chaletId: number, tarifa: Tarifa ) {
+        const sql = 'INSERT INTO TarifasChalet (id_chalet_usuario, precio, tipo_habitacion, temporada) VALUES (?, ?, ?, ?)'
+        const values = [
+            chaletId,
+            tarifa.precio,
+            tarifa.tipo_habitacion,
+            tarifa.temporada
+        ];
+
+        return db.execute(sql,values);
+    }
+
+    static async addChaletImage(chaletId: number ,imagenes: ChaletImages) {
+        const sql = 'INSERT INTO chalet_images (id_chalet, image) VALUES (?, ?)';
+        const values = [
+            chaletId,
+            imagenes.image
+        ];
+
+        return db.execute(sql, values);
+    }
 }
 
 

@@ -4,6 +4,9 @@ import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
 import Reserva from '../Dto/reservesDto';
 import UpdateUser from '../Dto/UpdateUserDto';
+import Tarifa from '../Dto/TarifasDto';
+import Chalet from '../Dto/ChaletDto';
+import ChaletImages from '../Dto/ImagenesDto';
 const bcrypt = require("bcryptjs");
 
 class UserService {
@@ -74,6 +77,18 @@ class UserService {
 
     static async updateUserProfile(user: UpdateUser) {
         return await UserRepository.updateUser(user);
+    }
+
+    static async addChalet(chalet: Chalet) {
+        return await UserRepository.addChalet(chalet);
+    }
+
+    static async addTarifa(tarifa: Tarifa) {
+        return await UserRepository.addTarifa(tarifa._id_chalet_usuario, tarifa);
+    }
+
+    static async addChaletImage(imagenes: ChaletImages) {
+        return await UserRepository.addChaletImage(imagenes._id_chalet, imagenes);
     }
 
 }
