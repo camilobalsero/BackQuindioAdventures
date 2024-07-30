@@ -9,16 +9,45 @@ import User from '../Dto/UserDto';
 
 class UserRepository {
 
-    static async add(user: User){
-        const sql = 'INSERT INTO usuario (documento, email, password, nombres, apellidos, edad, telefono, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-        const values = [user.documento, user.email, user.password, user.nombres, user.apellidos, user.edad,user.telefono, user.direccion];
-        return db.execute(sql, values);
+    static async add(user: User) {
+        const sql = 'CALL insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?)';
+        const values = [
+            user.documento,
+            user.email,
+            user.password,
+            user.nombres,
+            user.apellidos,
+            user.edad,
+            user.telefono,
+            user.direccion
+        ];
+    
+        try {
+            const [result]: any = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado insertarUsuario:", error);
+            throw error;
+        }
     }
 
-    static async login(auth: Auth){
-        const sql = 'SELECT password FROM usuario WHERE email=?'; 
+    static async login(auth: Auth) {
+        const sql = 'CALL authUsuario(?)';
         const values = [auth.email];
-        return db.execute(sql,values)
+    
+        try {
+            const [rows]: any = await db.execute(sql, values);
+            const passwordRows = rows[0];
+    
+            if (passwordRows.length > 0) {
+                return passwordRows[0].password;
+            } else {
+                throw new Error('No se encontró el usuario con el email proporcionado.');
+            }
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerPasswordPorEmail:", error);
+            throw error;
+        }
     }
 
     static async addReserva(reservesDto: Reserva) {
@@ -53,24 +82,40 @@ class UserRepository {
     }
 
     static async getUserByEmail(email: string): Promise<User[]> {
-        const sql = 'SELECT documento, email, password, nombres, apellidos, edad, image, telefono, direccion FROM usuario WHERE email = ?';
+        const sql = 'CALL obtenerDatosUsuario(?)';
         const values = [email];
+    
         try {
-            const [rows] = await db.execute(sql, values);
-
-            return rows as User[];
+            const [rows]: any = await db.execute(sql, values);
+            
+            const userRows = rows[0] as User[];
+    
+            return userRows;
         } catch (error) {
-            console.error("Error en UserRepository.getUserByEmail:", error);
+            console.error("Error al llamar al procedimiento almacenado obtenerDatosUsuario:", error);
             throw error;
         }
     }
 
 
     static async updateUser(user: UpdateUser) {
-        const sql = 'UPDATE usuario SET nombres = ?, apellidos = ?, edad = ?, telefono = ?, direccion = ? WHERE email = ?';
-        const values = [user.nombres, user.apellidos, user.edad, user.telefono, user.direccion, user.email];
-        console.log(db.execute(sql,values));
-        return db.execute(sql, values);
+        const sql = 'CALL actualizarUsuario(?, ?, ?, ?, ?, ?)';
+        const values = [
+            user.email,          
+            user.nombres,        
+            user.apellidos,      
+            user.edad,           
+            user.telefono,       
+            user.direccion       
+        ];
+    
+        try {
+            const [result]: any = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado actualizarUsuario:", error);
+            throw error;
+        }
     }
 
     static async addChalet(chalet: Chalet) {

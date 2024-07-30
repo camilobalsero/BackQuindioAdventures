@@ -20,9 +20,6 @@ let register = async (req: Request, res: Response) => {
     let user: User = new User(document, email, password, name, lastName, age, phoneNumber, address);
     await UserService.register(user)
 
-    console.log(532532525);
-    
-
     try {
       await mailerService.sendEmail(
         email,
