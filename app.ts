@@ -7,6 +7,7 @@ import reestablecer from "./routes/reestablecer";
 import cors from "cors";
 import profile from "./routes/profile";
 import actualizarPerfil from "./routes/actuallizarPerfil";
+import chatbot from "./routes/chatbot";
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,6 +20,7 @@ app.use('/reserva', reserva);
 app.use('/reestablecer', reestablecer);
 app.use('/user', profile); 
 app.use('/updateProfile', actualizarPerfil); 
+app.use('/chatbot', chatbot)
 
 const PORT = process.env.PORT || 10101;
 
