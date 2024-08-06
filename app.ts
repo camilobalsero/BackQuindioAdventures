@@ -7,9 +7,11 @@ import reestablecer from "./routes/reestablecer";
 import cors from "cors";
 import profile from "./routes/profile";
 import actualizarPerfil from "./routes/actuallizarPerfil";
+import imageRoutes from "./routes/imageRoutes"
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(cors());
 
@@ -19,6 +21,7 @@ app.use('/reserva', reserva);
 app.use('/reestablecer', reestablecer);
 app.use('/user', profile); 
 app.use('/updateProfile', actualizarPerfil); 
+app.use('/api/images', imageRoutes)
 
 const PORT = process.env.PORT || 10101;
 
