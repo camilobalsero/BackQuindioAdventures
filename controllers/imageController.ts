@@ -27,7 +27,7 @@ async function uploadFile(req: Request, res: Response) {
     // Sube el archivo al contenedor de blobs
     await blockBlobClient.upload(file.buffer, file.buffer.length);
 
-    res.status(200).send('File uploaded successfully');
+    res.status(200).send({ OK: 'image upload succesfully', url: blockBlobClient.url});
     console.log(blockBlobClient.url);
     
     return blockBlobClient.url
