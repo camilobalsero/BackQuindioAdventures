@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { header } from "express-validator";
 import jwt from "jsonwebtoken";
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {

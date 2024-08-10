@@ -5,9 +5,10 @@ class UpdateUser{
     _edad: number;
     _telefono: string;
     _direccion:string;
+    _image:string;
     constructor(email: string, nombres: string,
         apellidos:string, edad:number, telefono: string,
-        direccion:string
+        direccion:string, image:string
     ){
         this._email = email;
         this._nombres = nombres;
@@ -15,7 +16,7 @@ class UpdateUser{
         this._telefono = telefono;
         this._edad = edad;
         this._direccion = direccion;
-        
+        this._image = image;
     }
 
     get email(): string{
@@ -42,6 +43,10 @@ class UpdateUser{
         return this._edad
     }
 
+    get image(): string{
+        return this._image
+    }
+
     set documento(email:string){
         this._email = email
     }
@@ -64,6 +69,10 @@ class UpdateUser{
 
     set edad(edad:number){
         this._edad = edad
+    }
+
+    set image(image:string){
+        this._image = image
     }
 
 }

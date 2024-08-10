@@ -7,11 +7,13 @@ import UpdateUser from '../Dto/UpdateUserDto';
 import Tarifa from '../Dto/TarifasDto';
 import Chalet from '../Dto/ChaletDto';
 import ChaletImages from '../Dto/ImagenesDto';
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+import nodemailer from 'nodemailer';
+import UserRegister from '../Dto/UserRegisterDto';
 
 class UserService {
     
-    static async register(user: User) {
+    static async register(user: UserRegister) {
         user.password = await generateHash(user.password);
         return await UserRepository.add(user);
     }
@@ -20,10 +22,8 @@ class UserService {
         try {
             const result: any = await UserRepository.login(auth);
     
-            
             if (result[0] && result[0].length > 0) {
                 const hashedPassword = result;
-                
                 if (hashedPassword) {
                     const isPasswordValid = await bcrypt.compare(auth.password, hashedPassword);
                     if (isPasswordValid) {
@@ -42,15 +42,11 @@ class UserService {
             throw new Error("Authentication failed");
         }
     }
-    
 
     static async crearReserva(reserva: Reserva) {
-        
         try {
             const result: any = await UserRepository.addReserva(reserva);
-            console.log("Resultado de la consulta SQL:", result);
-            
-            if (result.affectedRows > 0) { // Usamos affectedRows para verificar inserción exitosa
+            if (result.affectedRows > 0) {
                 return { logged: true, status: "Reserva registrada" };
             }
             return { logged: false, status: "Fallo al realizar la reserva" };
@@ -62,10 +58,7 @@ class UserService {
 
     static async changePassword(email: string, newPassword: string) {
         try {
-            // Generar el hash de la nueva contraseña
             const newPasswordHash = await generateHash(newPassword);
-            
-            // Actualizar la contraseña en la base de datos
             await UserRepository.resetPassword(email, newPasswordHash);
 
             return { success: true, status: "Contraseña cambiada exitosamente" };
@@ -75,19 +68,27 @@ class UserService {
         }
     }
 
-    static async getUserByEmail(email: string): Promise<User> {
+    static async getUserByEmail(email: string): Promise<User | null> {
         try {
-            const result = await UserRepository.getUserByEmail(email); 
+            const result = await UserRepository.getUserByEmail(email);
             if (result.length > 0) {
-                return result[0];
+                const user = result[0];
+                
+                // Verificar que el email del usuario sea el mismo y que no sea solo la imagen por defecto
+                if (user.email === email && user._profile_image_url !== "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg") {
+                    return user;
+                } else {
+                    return null;
+                }
             } else {
-                throw new Error('Usuario no encontrado');
+                return null;
             }
         } catch (error) {
             console.error("Error en UserService.getUserByEmail:", error);
             throw error;
         }
     }
+    
 
     static async updateUserProfile(user: UpdateUser) {
         return await UserRepository.updateUser(user);
@@ -105,5 +106,24 @@ class UserService {
         return await UserRepository.addChaletImage(imagenes._id_chalet, imagenes);
     }
 
+    static async sendResetPasswordEmail(email: string, resetLink: string) {
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true, // Use `true` for port 465, `false` for all other ports
+            auth: {
+            user: "camilobalsero16@gmail.com",
+            pass: "cjhh ekrl emwt dvlc",
+            },
+        });
+
+        let info = await transporter.sendMail({
+            from:'"Cambio de Contraseña 👻" <camilobalsero16@gmail.com>',
+            to: email,
+            subject: "Restablecimiento de contraseña",
+            text: `Por favor, utiliza el siguiente enlace para restablecer tu contraseña: ${resetLink}`,
+            html: `<b>Por favor, utiliza el siguiente enlace para restablecer tu contraseña:</b> <a href="${resetLink}">Restablecer contraseña</a>`,
+        });
+    }
 }
 export default UserService;

@@ -10,14 +10,13 @@ let actualizarPerfil = async (req: Request, res: Response) => {
             lastName,
             phoneNumber,
             age,
-            address
+            address,
+            image
         } = req.body;  
         
-    
-
         const email = res.locals.user.email;
         
-        let updateUser: UpdateUser = new UpdateUser(email, name, lastName, age, phoneNumber, address, );
+        let updateUser: UpdateUser = new UpdateUser(email, name, lastName, age, phoneNumber, address, image );
         
         await UserService.updateUserProfile(updateUser); 
 

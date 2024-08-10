@@ -1,4 +1,4 @@
-class User {
+class UserRegister {
     _documento:string;
     _email: string;
     _password: string;
@@ -7,11 +7,10 @@ class User {
     _edad: number;
     _telefono: string;
     _direccion:string;
-    _profile_image_url: "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" | undefined
     constructor(
         documento: string, email: string, password: string, nombres: string, 
         apellidos:string, edad:number, telefono: string,
-        direccion:string, profile_image_url: "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" | undefined
+        direccion:string
     ) {
         this._email = email;
         this._nombres = nombres;
@@ -21,7 +20,6 @@ class User {
         this._edad = edad;
         this._documento = documento;
         this._direccion = direccion;
-        this._profile_image_url = profile_image_url
     }
         //Getters
         get email(): string{
@@ -52,10 +50,6 @@ class User {
 
         get documento(): string{
             return this._documento
-        }
-
-        get profile_img_url(): "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" | undefined{
-            return this._profile_image_url
         }
     
         //Setters
@@ -90,11 +84,7 @@ class User {
         set documento(documento:string){
             this._documento = documento
         }
-
-        set profile_img_url(profile_image_url:"https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" | undefined){
-            this._profile_image_url = profile_image_url
-        }
         
 }
 
-export default User;
+export default UserRegister;

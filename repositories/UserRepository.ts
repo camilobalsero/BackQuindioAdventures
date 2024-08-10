@@ -6,10 +6,11 @@ import Reserva from '../Dto/reservesDto';
 import Tarifa from '../Dto/TarifasDto';
 import UpdateUser from '../Dto/UpdateUserDto';
 import User from '../Dto/UserDto';
+import UserRegister from '../Dto/UserRegisterDto';
 
 class UserRepository {
 
-    static async add(user: User) {
+    static async add(user: UserRegister) {
         const sql = 'CALL insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [
             user.documento,
@@ -50,13 +51,11 @@ class UserRepository {
         }
     }
 
+
     static async addReserva(reservesDto: Reserva) {
-        const sql = 'INSERT INTO reserva (documento_usuario, precio, cantidad_personas, estancia, fecha_inicio, fecha_fin, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';
         const values = [
             reservesDto.documento,
-            reservesDto.precio,
-            reservesDto.cantPersonas,
-            reservesDto.estancia,
             reservesDto.fechaInicio,
             reservesDto.fechaFin,
             new Date()
@@ -87,7 +86,6 @@ class UserRepository {
     
         try {
             const [rows]: any = await db.execute(sql, values);
-            
             const userRows = rows[0] as User[];
     
             return userRows;
@@ -118,8 +116,8 @@ class UserRepository {
         }
     }
 
-    static async addChalet(chalet: Chalet) {
-        const sql = 'INSERT INTO chalet (nombre_chalet, ubicacion_chalet, capacidad, caracteristicas) VALUES (?, ?, ?, ?)';
+    static async addChalet(chalet: Chalet): Promise<number> {
+        const sql = 'CALL insertarChalet(?, ?, ?, ?, @chalet_id)';
         const values = [
             chalet.nombreChalet,
             chalet.ubicacionChalet,
@@ -128,17 +126,22 @@ class UserRepository {
         ];
 
         try {
-            const [result]: any = await db.execute(sql, values);
-            const chaletId = result.insertId;  // Obtener el ID del chalet insertado
+            // Ejecutar el procedimiento almacenado
+            await db.execute(sql, values);
+
+            // Obtener el ID del chalet recién insertado
+            const [rows]: any = await db.execute('SELECT @chalet_id AS chalet_id');
+            const chaletId = rows[0].chalet_id;
+
             return chaletId;
         } catch (error) {
-            console.error("Error en la ejecución de la consulta:", error);
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
             throw error;
         }
     }
     
-    static async addTarifa(chaletId: number, tarifa: Tarifa ) {
-        const sql = 'INSERT INTO TarifasChalet (id_chalet_usuario, precio, tipo_habitacion, temporada) VALUES (?, ?, ?, ?)'
+    static async addTarifa(chaletId: number, tarifa: Tarifa): Promise<void> {
+        const sql = 'CALL insertarTarifa(?, ?, ?, ?)';
         const values = [
             chaletId,
             tarifa.precio,
@@ -146,7 +149,12 @@ class UserRepository {
             tarifa.temporada
         ];
 
-        return db.execute(sql,values);
+        try {
+            await db.execute(sql, values);
+        } catch (error) {
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
+            throw error;
+        }
     }
 
     static async addChaletImage(chaletId: number ,imagenes: ChaletImages) {

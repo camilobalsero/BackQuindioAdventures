@@ -1,7 +1,7 @@
-import User from '../Dto/UserDto';
 import { Request, Response } from "express";
 import UserService from '../services/Userservice';
 import mailerService from '../services/mailerService';
+import UserRegister from '../Dto/UserRegisterDto';
 
 
 let register = async (req: Request, res: Response) => {
@@ -17,8 +17,8 @@ let register = async (req: Request, res: Response) => {
       password,
     } = req.body;
 
-    let user: User = new User(document, email, password, name, lastName, age, phoneNumber, address);
-    await UserService.register(user)
+    let userRegister: UserRegister = new UserRegister(document, email, password, name, lastName, age, phoneNumber, address);
+    await UserService.register(userRegister)
 
     try {
       await mailerService.sendEmail(

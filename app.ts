@@ -8,6 +8,8 @@ import cors from "cors";
 import profile from "./routes/profile";
 import actualizarPerfil from "./routes/actuallizarPerfil";
 import imageRoutes from "./routes/imageRoutes"
+import createChalet from "./routes/createChalet";
+import solicitarCambio from "./routes/solicitarCambio"
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,9 +21,11 @@ app.use('/register', register);
 app.use('/auth', auth);
 app.use('/reserva', reserva);
 app.use('/reestablecer', reestablecer);
+app.use('/envioCorreoCambioContrasena',solicitarCambio)
 app.use('/user', profile); 
 app.use('/updateProfile', actualizarPerfil); 
 app.use('/api/images', imageRoutes)
+app.use('/createChalet', createChalet );
 
 const PORT = process.env.PORT || 10101;
 
