@@ -10,6 +10,8 @@ import actualizarPerfil from "./routes/actuallizarPerfil";
 import imageRoutes from "./routes/imageRoutes"
 import createChalet from "./routes/createChalet";
 import solicitarCambio from "./routes/solicitarCambio"
+import adminRegister from "./controllers/registerAdminController";
+
 
 const app = express().use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,6 +28,8 @@ app.use('/user', profile);
 app.use('/updateProfile', actualizarPerfil); 
 app.use('/api/images', imageRoutes)
 app.use('/createChalet', createChalet );
+app.use('/registerAdmin', adminRegister);
+
 
 const PORT = process.env.PORT || 10101;
 
