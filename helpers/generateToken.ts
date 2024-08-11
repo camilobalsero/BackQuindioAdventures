@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 function generateToken(email: string){
     try {
-        const token = jwt.sign({ email: email }, 'camilo', { expiresIn: '5h'});
+        const token = jwt.sign({ email: email }, 'camilo', { expiresIn: '6h'});
         return token;
     } catch (error) {
         console.error('Error al generar el token:', error);

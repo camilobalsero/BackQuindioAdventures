@@ -97,15 +97,17 @@ class UserRepository {
 
 
     static async updateUser(user: UpdateUser) {
-        const sql = 'CALL actualizarUsuario(?, ?, ?, ?, ?, ?)';
+        const sql = 'CALL actualizarUsuario(?, ?, ?, ?, ?, ?, ?)';
         const values = [
-            user.email,          
-            user.nombres,        
-            user.apellidos,      
-            user.edad,           
-            user.telefono,       
-            user.direccion       
+            user.email,
+            user.nombres,
+            user.apellidos,
+            user.edad,
+            user.telefono,
+            user.direccion,
+            user.image
         ];
+    
     
         try {
             const [result]: any = await db.execute(sql, values);

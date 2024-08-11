@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import UserService from "../services/Userservice";
+import UserService from "../services/UserService";
 
 const restablecerConToken = async (req: Request, res: Response) => {
     try {

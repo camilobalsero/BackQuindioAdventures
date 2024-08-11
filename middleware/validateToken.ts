@@ -3,19 +3,29 @@ import jwt from "jsonwebtoken";
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
     const headerToken = req.headers['authorization'];
+    
     if (headerToken && headerToken.startsWith('Bearer ')) {
-        const bearerToken = headerToken.slice(7);
+        const bearerToken = headerToken.slice(7); // Remover "Bearer " del token
+
         try {
-            const tokenValido = jwt.verify(bearerToken, 'camilo') as { email?: string };
+            // Verificar el token con la clave secreta 'camilo'
+            const tokenValido = jwt.verify(bearerToken, 'camilo') as { email?: string, exp?: number };
+            
+            // Verificar si el token contiene un email válido
             if (tokenValido.email) {
                 res.locals.user = tokenValido;
-                next();
+                next(); // Pasar al siguiente middleware o controlador
             } else {
                 res.status(400).json({ message: "Email no disponible en el token" });
             }
         } catch (error) {
-            console.error("Error al verificar el token:", error);
-            res.status(400).json({ status: 'Acceso denegado' });
+            // Diferenciar entre errores de token expirado y otros errores
+            if (error instanceof jwt.TokenExpiredError) {
+                res.status(401).json({ status: 'Token expirado' });
+            } else {
+                console.error("Error al verificar el token:", error);
+                res.status(403).json({ status: 'Acceso denegado: Token no válido' });
+            }
         }
     } else {
         res.status(400).json({ status: 'Acceso denegado: Token no proporcionado' });

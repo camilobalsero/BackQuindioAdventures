@@ -1,6 +1,6 @@
 import UpdateUser from '../Dto/UpdateUserDto';
 import { Request, Response } from "express";
-import UserService from '../services/Userservice';
+import UserService from '../services/UserService';
 import mailerService from '../services/mailerService';
 
 let actualizarPerfil = async (req: Request, res: Response) => {
@@ -12,7 +12,7 @@ let actualizarPerfil = async (req: Request, res: Response) => {
             age,
             address,
             image
-        } = req.body;  
+        } = req.body; 
         
         const email = res.locals.user.email;
         
