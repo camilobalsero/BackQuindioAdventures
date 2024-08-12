@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
-import UserService from '../services/UserService';
+import UserService from '../services/Userservice';
 import Tarifa from '../Dto/TarifasDto';
 import ChaletImages from '../Dto/ImagenesDto';
 

@@ -1,6 +1,6 @@
 import UpdateUser from '../Dto/UpdateUserDto';
 import { Request, Response } from "express";
-import UserService from '../services/UserService';
+import UserService from '../services/Userservice';
 import mailerService from '../services/mailerService';
 
 let actualizarPerfil = async (req: Request, res: Response) => {
