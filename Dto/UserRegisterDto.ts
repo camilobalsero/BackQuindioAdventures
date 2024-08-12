@@ -7,10 +7,11 @@ class UserRegister {
     _edad: number;
     _telefono: string;
     _direccion:string;
+    _rol:string;
     constructor(
         documento: string, email: string, password: string, nombres: string, 
         apellidos:string, edad:number, telefono: string,
-        direccion:string
+        direccion:string, rol:string
     ) {
         this._email = email;
         this._nombres = nombres;
@@ -20,6 +21,7 @@ class UserRegister {
         this._edad = edad;
         this._documento = documento;
         this._direccion = direccion;
+        this._rol = rol;
     }
         //Getters
         get email(): string{
@@ -50,6 +52,10 @@ class UserRegister {
 
         get documento(): string{
             return this._documento
+        }
+
+        get rol():string{
+            return this._rol
         }
     
         //Setters
@@ -83,6 +89,10 @@ class UserRegister {
 
         set documento(documento:string){
             this._documento = documento
+        }
+
+        set rol(rol:string){
+            this._rol = rol
         }
         
 }
