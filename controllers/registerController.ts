@@ -15,9 +15,10 @@ let register = async (req: Request, res: Response) => {
       address,
       email,
       password,
+      rol = 'usuario'
     } = req.body;
 
-    let userRegister: UserRegister = new UserRegister(document, email, password, name, lastName, age, phoneNumber, address);
+    let userRegister: UserRegister = new UserRegister(document, email, password, name, lastName, age, phoneNumber, address,rol);
     await UserService.register(userRegister)
 
     try {

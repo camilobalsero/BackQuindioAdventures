@@ -11,7 +11,7 @@ import UserRegister from '../Dto/UserRegisterDto';
 class UserRepository {
 
     static async add(user: UserRegister) {
-        const sql = 'CALL insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'CALL insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [
             user.documento,
             user.email,
@@ -20,7 +20,8 @@ class UserRepository {
             user.apellidos,
             user.edad,
             user.telefono,
-            user.direccion
+            user.direccion,
+            user.rol
         ];
     
         try {
@@ -51,6 +52,24 @@ class UserRepository {
         }
     }
 
+    static async loginAdmin(auth: Auth) {
+        const sql = 'CALL authAdmin(?)';
+        const values = [auth.email];
+    
+        try {
+            const [rows]: any = await db.execute(sql, values);
+            console.log('Resultado de la consulta:', rows);
+            const passwordRows = rows[0];
+        
+            if (passwordRows && passwordRows.length > 0) {
+                return passwordRows[0].password;
+            } else {
+                return { logged: false, status: "Incorrect username or password" };
+            }
+        } catch (error) {
+            return { logged: false, status: "Incorrect username or password" };
+        }
+    }    
 
     static async addReserva(reservesDto: Reserva) {
         const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';

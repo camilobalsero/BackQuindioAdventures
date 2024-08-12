@@ -10,7 +10,7 @@ import actualizarPerfil from "./routes/actuallizarPerfil";
 import imageRoutes from "./routes/imageRoutes"
 import createChalet from "./routes/createChalet";
 import solicitarCambio from "./routes/solicitarCambio"
-import adminRegister from "./controllers/registerAdminController";
+import authAdmin from "./routes/authAdmin";
 
 
 const app = express().use(bodyParser.json());
@@ -28,7 +28,7 @@ app.use('/user', profile);
 app.use('/updateProfile', actualizarPerfil); 
 app.use('/api/images', imageRoutes)
 app.use('/createChalet', createChalet );
-app.use('/registerAdmin', adminRegister);
+app.use('/authAdmin', authAdmin);
 
 
 const PORT = process.env.PORT || 10101;
