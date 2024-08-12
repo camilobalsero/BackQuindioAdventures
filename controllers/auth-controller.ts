@@ -3,7 +3,7 @@ const db = require('../config/config-db.js');
 import { Request, Response} from "express";
 import generateToken from "../helpers/generateToken";
 import Auth from "../Dto/AuthDto";
-import UserService from "../services/UserService";
+import UserService from "../services/Userservice";
 
 const authController = async (req: Request, res: Response)=> {
     try {
