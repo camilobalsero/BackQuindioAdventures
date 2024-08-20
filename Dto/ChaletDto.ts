@@ -1,15 +1,15 @@
 class Chalet {
     _nombreChalet: string;
     _ubicacionChalet: string;
-    _capacidad: number;
     _caracteristicas:string;
+    _email:string
     constructor(
-        nombreChalet: string, ubicacionChalet: string, capacidad: number, caracteristicas: string
+        nombreChalet: string, ubicacionChalet: string, caracteristicas: string, email:string
     ) {
         this._nombreChalet = nombreChalet,
         this._ubicacionChalet= ubicacionChalet,
-        this._capacidad= capacidad,
-        this._caracteristicas= caracteristicas
+        this._caracteristicas= caracteristicas,
+        this._email = email
     }
         //Getters
         get nombreChalet(): string{
@@ -20,12 +20,12 @@ class Chalet {
             return this._ubicacionChalet
         }
 
-        get capacidad(): number{
-            return this._capacidad
-        }
-
         get caracteristicas(): string{
             return this._caracteristicas
+        }
+
+        get email():string{
+            return this._email
         }
 
         //Setters
@@ -36,10 +36,13 @@ class Chalet {
         set ubicacionChalet(ubicacionChalet:string){
             this._ubicacionChalet = ubicacionChalet
         }
-    
 
-        set capacidad(capacidad:number){
-            this._capacidad = capacidad
+        set caracteristicas(caracteristicas:string){
+            this._caracteristicas = caracteristicas
+        }
+
+        set email(email:string){
+            this._email = email
         }
 }
 

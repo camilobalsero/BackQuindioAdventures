@@ -3,6 +3,7 @@ import Auth from '../Dto/AuthDto';
 import Chalet from '../Dto/ChaletDto';
 import ChaletImages from '../Dto/ImagenesDto';
 import Reserva from '../Dto/reservesDto';
+import ServiciosChalet from '../Dto/ServiciosDto';
 import Tarifa from '../Dto/TarifasDto';
 import UpdateUser from '../Dto/UpdateUserDto';
 import User from '../Dto/UserDto';
@@ -142,9 +143,10 @@ class UserRepository {
         const values = [
             chalet.nombreChalet,
             chalet.ubicacionChalet,
-            chalet.capacidad,
-            chalet.caracteristicas
+            chalet.caracteristicas,
+            chalet.email
         ];
+        
 
         try {
             // Ejecutar el procedimiento almacenado
@@ -170,6 +172,8 @@ class UserRepository {
             tarifa.temporada
         ];
 
+        
+
         try {
             await db.execute(sql, values);
         } catch (error) {
@@ -184,6 +188,22 @@ class UserRepository {
             chaletId,
             imagenes.image
         ];
+
+        console.log(values,3433);
+        
+
+        return db.execute(sql, values);
+    }
+
+    static async addServicioChalet(chaletId: number , servicios: ServiciosChalet) {
+        const sql = 'INSERT INTO chalet_servicios (chalet_id, servicio) VALUES (?, ?)';
+        const values = [
+            chaletId,
+            servicios.servicio
+        ];
+
+        console.log(values,3433);
+        
 
         return db.execute(sql, values);
     }

@@ -10,6 +10,7 @@ import ChaletImages from '../Dto/ImagenesDto';
 import bcrypt from "bcryptjs";
 import nodemailer from 'nodemailer';
 import UserRegister from '../Dto/UserRegisterDto';
+import ServiciosChalet from '../Dto/ServiciosDto';
 
 class UserService {
     
@@ -129,6 +130,10 @@ class UserService {
 
     static async addChaletImage(imagenes: ChaletImages) {
         return await UserRepository.addChaletImage(imagenes._id_chalet, imagenes);
+    }
+
+    static async addServicioChalet(servicios: ServiciosChalet) {
+        return await UserRepository.addServicioChalet(servicios._id_chalet, servicios);
     }
 
     static async sendResetPasswordEmail(email: string, resetLink: string) {

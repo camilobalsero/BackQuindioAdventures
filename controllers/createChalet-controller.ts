@@ -2,26 +2,30 @@ import { Request, Response } from 'express';
 import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
-import UserService from '../services/UserService';
+import UserService from '../services/Userservice';
 import Tarifa from '../Dto/TarifasDto';
 import ChaletImages from '../Dto/ImagenesDto';
+import ServiciosChalet from '../Dto/ServiciosDto';
 
 const crearChalet = async (req: Request, res: Response) => {
     try {
         const {
-            nombre_chalet,
-            ubicacion_chalet,
-            capacidad,
-            caracteristicas,
+            descripcion,
+            imagenes,
+            nombre,
+            servicios,
             tarifas,
-            imagenes
+            ubicacion
         } = req.body;
+
+        console.log(req.body);
+        
 
         // Recupera el email del usuario autenticado
         const email = res.locals.user.email;
 
         // Crear el objeto del chalet
-        let chalet: Chalet = new Chalet(nombre_chalet, ubicacion_chalet, capacidad, caracteristicas);
+        let chalet: Chalet = new Chalet(nombre, ubicacion, descripcion,email);
 
         try {
             // Insertar el chalet en la base de datos
@@ -29,14 +33,19 @@ const crearChalet = async (req: Request, res: Response) => {
 
             // Insertar las tarifas asociadas al chalet
             for (const tarifa of tarifas) {
-                let newTarifa: Tarifa = new Tarifa(chaletId, tarifa.precio, tarifa.tipo_habitacion, tarifa.temporada);
+                let newTarifa: Tarifa = new Tarifa(chaletId, tarifa.precio, tarifa.tipohabitacion, tarifa.temporada);
                 await UserService.addTarifa(newTarifa);
             }
 
             // Insertar las imágenes asociadas al chalet
             for (const imagen of imagenes) {
-                let newImagen: ChaletImages = new ChaletImages(chaletId, imagen.image);
+                let newImagen: ChaletImages = new ChaletImages(chaletId, imagen);
                 await UserService.addChaletImage(newImagen);
+            }
+
+            for (const servicio of servicios){
+                let newServicio: ServiciosChalet = new ServiciosChalet(chaletId, servicio);
+                await UserService.addServicioChalet(newServicio);
             }
 
             // Enviar correo de confirmación
