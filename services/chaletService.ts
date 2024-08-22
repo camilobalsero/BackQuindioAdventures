@@ -42,6 +42,16 @@ class chaletService{
             throw error;
         }
     }
+
+    static async getChaletById(chaletId: number) {
+        try {
+            const chalet = await chaletRepository.getChaletById(chaletId);
+            return chalet;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalet por ID:", error);
+            throw error;
+        }
+    }
 }
 
 export default chaletService;

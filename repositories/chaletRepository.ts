@@ -89,6 +89,18 @@ class chaletRepository{
         }
     }
 
+    static async getChaletById(chaletId: number) {
+        const sql = 'CALL obtenerChaletPorId(?)';
+        
+        try {
+            const [rows]: any = await db.execute(sql, [chaletId]);
+            return rows[0]; // Regresamos el chalet encontrado
+        } catch (error) {
+            console.error("Error en obtenerChaletPorId:", error);
+            throw error;
+        }
+    }
+
 }
 
 export default chaletRepository;

@@ -12,6 +12,8 @@ import createChalet from "./routes/createChalet";
 import solicitarCambio from "./routes/solicitarCambio"
 import authAdmin from "./routes/authAdmin";
 import obtenerChalets from "./routes/getChalet"
+import obtenerChaletsId from "./routes/getChaletId"
+
 
 
 const app = express().use(bodyParser.json());
@@ -31,6 +33,7 @@ app.use('/api/images', imageRoutes)
 app.use('/createChalet', createChalet );
 app.use('/authAdmin', authAdmin);
 app.use('/chalet',obtenerChalets)
+app.use('/chaletId', obtenerChaletsId )
 
 
 const PORT = process.env.PORT || 10101;
