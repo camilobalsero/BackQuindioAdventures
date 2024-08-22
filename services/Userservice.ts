@@ -120,22 +120,6 @@ class UserService {
         return await UserRepository.updateUser(user);
     }
 
-    static async addChalet(chalet: Chalet) {
-        return await UserRepository.addChalet(chalet);
-    }
-
-    static async addTarifa(tarifa: Tarifa) {
-        return await UserRepository.addTarifa(tarifa._id_chalet_usuario, tarifa);
-    }
-
-    static async addChaletImage(imagenes: ChaletImages) {
-        return await UserRepository.addChaletImage(imagenes._id_chalet, imagenes);
-    }
-
-    static async addServicioChalet(servicios: ServiciosChalet) {
-        return await UserRepository.addServicioChalet(servicios._id_chalet, servicios);
-    }
-
     static async sendResetPasswordEmail(email: string, resetLink: string) {
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
@@ -163,5 +147,6 @@ class UserService {
         `,
         });
     }
+
 }
 export default UserService;

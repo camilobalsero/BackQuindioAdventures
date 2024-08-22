@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
-import UserService from '../services/Userservice';
 import Tarifa from '../Dto/TarifasDto';
 import ChaletImages from '../Dto/ImagenesDto';
 import ServiciosChalet from '../Dto/ServiciosDto';
+import ChaletService from '../services/chaletService';
 
 const crearChalet = async (req: Request, res: Response) => {
     try {
@@ -29,30 +29,30 @@ const crearChalet = async (req: Request, res: Response) => {
 
         try {
             // Insertar el chalet en la base de datos
-            const chaletId = await UserService.addChalet(chalet);
+            const chaletId = await ChaletService.addChalet(chalet);
 
             // Insertar las tarifas asociadas al chalet
             for (const tarifa of tarifas) {
                 let newTarifa: Tarifa = new Tarifa(chaletId, tarifa.precio, tarifa.tipohabitacion, tarifa.temporada);
-                await UserService.addTarifa(newTarifa);
+                await ChaletService.addTarifa(newTarifa);
             }
 
             // Insertar las imágenes asociadas al chalet
             for (const imagen of imagenes) {
                 let newImagen: ChaletImages = new ChaletImages(chaletId, imagen);
-                await UserService.addChaletImage(newImagen);
+                await ChaletService.addChaletImage(newImagen);
             }
 
             for (const servicio of servicios){
                 let newServicio: ServiciosChalet = new ServiciosChalet(chaletId, servicio);
-                await UserService.addServicioChalet(newServicio);
+                await ChaletService.addServicioChalet(newServicio);
             }
 
             // Enviar correo de confirmación
             await mailerService.sendEmail(
                 email,
                 "Haz registrado tu chalet exitosamente ✔",
-                `Hola, bienvenido a nuestro servicio!`,
+                `Hola, bienvenido a nuestro servicios`,
                 `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
             );
 
