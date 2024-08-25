@@ -1,7 +1,8 @@
 import express from 'express';
-import obtenerChaletsId from '../controllers/getChaletId-controller';
+import obtenerChaletPorId from '../controllers/getChaletId-controller';
+
 const router = express.Router();
 
-router.get('/', obtenerChaletsId);
+router.get('/chalets/:id', obtenerChaletPorId);
 
 export default router;
