@@ -13,7 +13,7 @@ import solicitarCambio from "./routes/solicitarCambio"
 import authAdmin from "./routes/authAdmin";
 import obtenerChalets from "./routes/getChalet"
 import obtenerChaletsId from "./routes/getChaletId"
-
+import obtenerTemporada from "./routes/temporadas"
 
 
 const app = express().use(bodyParser.json());
@@ -24,7 +24,6 @@ app.use(cors());
 
 app.use('/register', register);
 app.use('/auth', auth);
-app.use('/reserva', reserva);
 app.use('/reestablecer', reestablecer);
 app.use('/envioCorreoCambioContrasena',solicitarCambio)
 app.use('/user', profile); 
@@ -34,6 +33,8 @@ app.use('/createChalet', createChalet );
 app.use('/authAdmin', authAdmin);
 app.use('/chalet',obtenerChalets)
 app.use('/chaletId', obtenerChaletsId )
+app.use('/reserva', reserva);
+app.use('/temporadas', obtenerTemporada);
 
 
 const PORT = process.env.PORT || 10101;

@@ -1,68 +1,33 @@
-import { Request, Response } from "express";
-import UserService from "../services/Userservice";
-import Reserva from "../Dto/reservesDto";
+import { Request, Response } from 'express';
+import ReservesService from '../services/reservesService';
+import Reserva from '../Dto/reservesDto';
 
-let reserva = async (req: Request, res: Response) => {
+const crearReserva = async (req: Request, res: Response) => {
     try {
         const {
-            documento,
+            idChalet,
             precio,
             cantPersonas,
             estancia,
             fechaInicio,
-            fechaFin
+            fechaFin,
+            nombre
         } = req.body;
 
-        console.log("Datos recibidos en el cuerpo de la solicitud:", req.body);
+        // Obtener el email del usuario desde el token
+        const email = res.locals.user.email;
 
-        // Validar que todos los campos están presentes
-        if (!documento || !precio || !cantPersonas || !estancia || !fechaInicio || !fechaFin) {
-            return res.status(400).json({ 
-                status: 'Datos incompletos en la solicitud'
-            });
-        }
+        // Crear el objeto Reserva
+        const reserva = new Reserva(idChalet, precio, cantPersonas, estancia, new Date(fechaInicio), new Date(fechaFin), nombre, email);
 
-        // Convertir strings a objetos de tipo Date
-        const fechaInicioObj = new Date(fechaInicio);
-        const fechaFinObj = new Date(fechaFin);
+        // Insertar la reserva usando el servicio
+        const reservaId = await ReservesService.createReserva(reserva);
 
-        // Validar que las fechas son válidas y tienen sentido
-        if (isNaN(fechaInicioObj.getTime()) || isNaN(fechaFinObj.getTime())) {
-            return res.status(400).json({
-                status: 'Fechas inválidas'
-            });
-        }
-
-        if (fechaInicioObj > fechaFinObj) {
-            return res.status(400).json({
-                status: 'La fecha de inicio no puede ser posterior a la fecha de fin'
-            });
-        }
-
-        const nuevaReserva = new Reserva(documento, precio, cantPersonas, estancia, fechaInicioObj, fechaFinObj);
-
-        console.log("Nueva reserva creada:", nuevaReserva);
-
-        const result: any = await UserService.crearReserva(nuevaReserva);
-
-        console.log("Resultado de crearReserva:", result);
-
-        if (result.logged) {
-            console.log("Reserva registrada con éxito");
-            return res.status(200).json({
-                status: "Reserva registrada",
-            });
-        }
-        return res.status(401).json({ 
-            status: 'Fallo al realizar la reserva'
-        });
-    } catch (error: any) {
-        console.error("Error en el controlador de reservas:", error);
-        return res.status(401).json({ 
-            status: 'No ingreso datos',
-            error: error.message
-        });
+        return res.status(201).json({ status: 'Reserva creada exitosamente', reservaId });
+    } catch (error) {
+        console.error("Error al crear la reserva:", error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
-};
+}
 
-export default reserva;
+export default crearReserva;

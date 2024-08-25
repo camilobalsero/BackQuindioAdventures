@@ -71,28 +71,6 @@ class UserRepository {
             return { logged: false, status: "Incorrect username or password" };
         }
     }    
-
-    static async addReserva(reservesDto: Reserva) {
-        const sql = 'INSERT INTO reserva (documento_usuario, cantidad_ninos, cantidad_adultos,fecha_inicio, fecha_fin,nombre) VALUES (?, ?, ?, ?, ?, ?)';
-        const values = [
-            reservesDto.documento,
-            reservesDto.fechaInicio,
-            reservesDto.fechaFin,
-            new Date()
-        ];
-        
-        console.log("SQL Query: ", sql);
-        console.log("Values: ", values);
-
-        try {
-            const [result] = await db.execute(sql, values);
-            console.log("Resultado de la ejecución de la consulta:", result);
-            return result;
-        } catch (error) {
-            console.error("Error en la ejecución de la consulta:", error);
-            throw error;
-        }
-    }
     
     static async resetPassword(email: string, newPasswordHash: string) {
         const sql = 'UPDATE usuario SET password = ? WHERE email = ?';

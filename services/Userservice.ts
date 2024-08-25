@@ -69,19 +69,6 @@ class UserService {
         }
     }
 
-    static async crearReserva(reserva: Reserva) {
-        try {
-            const result: any = await UserRepository.addReserva(reserva);
-            if (result.affectedRows > 0) {
-                return { logged: true, status: "Reserva registrada" };
-            }
-            return { logged: false, status: "Fallo al realizar la reserva" };
-        } catch (error) {
-            console.error("Error en UserService.crearReserva:", error);
-            throw error;
-        }
-    }
-
     static async changePassword(email: string, newPassword: string) {
         try {
             const newPasswordHash = await generateHash(newPassword);
