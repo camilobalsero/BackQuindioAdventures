@@ -1,68 +1,60 @@
-import { Request, Response } from "express";
-import UserService from "../services/Userservice";
-import Reserva from "../Dto/reservesDto";
+import { Request, Response } from 'express';
+import ReservesService from '../services/reservesService';
+import Reserva from '../Dto/ReservesDto';
 
-let reserva = async (req: Request, res: Response) => {
+const crearReserva = async (req: Request, res: Response) => {
     try {
         const {
             documento,
-            precio,
-            cantPersonas,
-            estancia,
-            fechaInicio,
-            fechaFin
+            cantidadPersonas,
+            nombre,
+            apellido,
+            telefono,
+            direccion,
+            checkin,
+            checkout,
+            precioTotal,
+            tarifaSeleccionada
         } = req.body;
 
-        console.log("Datos recibidos en el cuerpo de la solicitud:", req.body);
+        // Obtener el email del usuario desde el token
+        const email = res.locals.user.email;
 
-        // Validar que todos los campos están presentes
-        if (!documento || !precio || !cantPersonas || !estancia || !fechaInicio || !fechaFin) {
-            return res.status(400).json({ 
-                status: 'Datos incompletos en la solicitud'
-            });
-        }
+        // Convertir las fechas a objetos Date
+        const fechaInicio = new Date(checkin);
+        const fechaFin = new Date(checkout);
 
-        // Convertir strings a objetos de tipo Date
-        const fechaInicioObj = new Date(fechaInicio);
-        const fechaFinObj = new Date(fechaFin);
+        // Calcular el total de días entre las fechas
+        const timeDiff = fechaFin.getTime() - fechaInicio.getTime();
+        const totalDias = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
 
-        // Validar que las fechas son válidas y tienen sentido
-        if (isNaN(fechaInicioObj.getTime()) || isNaN(fechaFinObj.getTime())) {
-            return res.status(400).json({
-                status: 'Fechas inválidas'
-            });
-        }
+        // Crear el objeto Reserva con los datos recibidos
+        const reserva = new Reserva(
+            email, // Email obtenido del token
+            tarifaSeleccionada.id_chalet_usuario, // ID del chalet
+            documento,
+            cantidadPersonas,
+            nombre,
+            apellido,
+            telefono,
+            direccion,
+            precioTotal, // Convertir precio a número
+            totalDias, // Estancia (opcional si deseas unir check-in y check-out)
+            fechaInicio, // Fecha de inicio
+            fechaFin, // Fecha de fin
+            tarifaSeleccionada, // Tarifa seleccionada
+        );
 
-        if (fechaInicioObj > fechaFinObj) {
-            return res.status(400).json({
-                status: 'La fecha de inicio no puede ser posterior a la fecha de fin'
-            });
-        }
+        console.log(reserva,234567);
+        
+        // Insertar la reserva usando el servicio
+        const reservaId = await ReservesService.createReserva(reserva);
 
-        const nuevaReserva = new Reserva(documento, precio, cantPersonas, estancia, fechaInicioObj, fechaFinObj);
-
-        console.log("Nueva reserva creada:", nuevaReserva);
-
-        const result: any = await UserService.crearReserva(nuevaReserva);
-
-        console.log("Resultado de crearReserva:", result);
-
-        if (result.logged) {
-            console.log("Reserva registrada con éxito");
-            return res.status(200).json({
-                status: "Reserva registrada",
-            });
-        }
-        return res.status(401).json({ 
-            status: 'Fallo al realizar la reserva'
-        });
-    } catch (error: any) {
-        console.error("Error en el controlador de reservas:", error);
-        return res.status(401).json({ 
-            status: 'No ingreso datos',
-            error: error.message
-        });
+        return res.status(201).json({ status: 'Reserva creada exitosamente', reservaId });
+    } catch (error) {
+        console.error("Error al crear la reserva:", error);
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
-};
+}
 
-export default reserva;
+export default crearReserva;

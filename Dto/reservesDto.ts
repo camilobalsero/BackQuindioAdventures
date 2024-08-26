@@ -1,67 +1,77 @@
 class Reserva {
+    private _email: string;
+    private _idChalet: number;
     private _documento: string;
-    private _precio: number;
     private _cantPersonas: number;
-    private _estancia: number;
+    private _nombre: string;
+    private _apellido: string;
+    private _telefono: string;
+    private _direccion: string;
+    private _precioFinal: number;
+    private _estancia: number; // Cambiado a string si se almacena como TEXT
     private _fechaInicio: Date;
     private _fechaFin: Date;
+    private _tarifa: any; // JSON
 
-    constructor(documento: string, precio: number, cantPersonas: number, estancia: number, fechaInicio: Date, fechaFin: Date) {
+    constructor(
+        email: string,
+        idChalet: number,
+        documento: string,
+        cantPersonas: number,
+        nombre: string,
+        apellido: string,
+        telefono: string,
+        direccion: string,
+        precioFinal: number,
+        estancia: number,
+        fechaInicio: Date,
+        fechaFin: Date,
+        tarifa: any
+    ) {
+        this._email = email;
+        this._idChalet = idChalet;
         this._documento = documento;
-        this._precio = precio;
         this._cantPersonas = cantPersonas;
+        this._nombre = nombre;
+        this._apellido = apellido;
+        this._telefono = telefono;
+        this._direccion = direccion;
+        this._precioFinal = precioFinal;
         this._estancia = estancia;
         this._fechaInicio = fechaInicio;
         this._fechaFin = fechaFin;
+        this._tarifa = tarifa;
     }
 
-    get documento(): string {
-        return this._documento;
-    }
+    // Getters
+    get email(): string { return this._email; }
+    get idChalet(): number { return this._idChalet; }
+    get documento(): string { return this._documento; }
+    get cantPersonas(): number { return this._cantPersonas; }
+    get nombre(): string { return this._nombre; }
+    get apellido(): string { return this._apellido; }
+    get telefono(): string { return this._telefono; }
+    get direccion(): string { return this._direccion; }
+    get precioFinal(): number { return this._precioFinal; }
+    get estancia(): number { return this._estancia; }
+    get fechaInicio(): Date { return this._fechaInicio; }
+    get fechaFin(): Date { return this._fechaFin; }
+    get tarifa(): any { return this._tarifa; }
 
-    get precio(): number {
-        return this._precio;
-    }
-
-    get cantPersonas(): number {
-        return this._cantPersonas;
-    }
-
-    get estancia(): number {
-        return this._estancia;
-    }
-
-    get fechaInicio(): Date {
-        return this._fechaInicio;
-    }
-
-    get fechaFin(): Date {
-        return this._fechaFin;
-    }
-
-    set documento(documento: string) {
-        this._documento = documento;
-    }
-
-    set precio(precio: number) {
-        this._precio = precio;
-    }
-
-    set cantPersonas(cantPersonas: number) {
-        this._cantPersonas = cantPersonas;
-    }
-
-    set estancia(estancia: number) {
-        this._estancia = estancia;
-    }
-
-    set fechaInicio(fechaInicio: Date) {
-        this._fechaInicio = fechaInicio;
-    }
-
-    set fechaFin(fechaFin: Date) {
-        this._fechaFin = fechaFin;
-    }
+    // Setters
+    set email(value: string) { this._email = value; }
+    set idChalet(value: number) { this._idChalet = value; }
+    set documento(value: string) { this._documento = value; }
+    set cantPersonas(value: number) { this._cantPersonas = value; }
+    set nombre(value: string) { this._nombre = value; }
+    set apellido(value: string) { this._apellido = value; }
+    set telefono(value: string) { this._telefono = value; }
+    set direccion(value: string) { this._direccion = value; }
+    set precioFinal(value: number) { this._precioFinal = value; }
+    set estancia(value: number) { this._estancia = value; }
+    set fechaInicio(value: Date) { this._fechaInicio = value; }
+    set fechaFin(value: Date) { this._fechaFin = value; }
+    set tarifa(value: any) { this._tarifa = value; }
 }
 
 export default Reserva;
