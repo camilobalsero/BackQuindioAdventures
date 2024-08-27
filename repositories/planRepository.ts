@@ -7,8 +7,8 @@ class planRepository{
     static async addPlan(plan: Plan): Promise<number> {
         const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @chalet_id)';
         const values = [
-            plan.nombreChalet,
-            plan.ubicacionChalet,
+            plan.nombrePlan,
+            plan.ubicacionPlan,
             plan.caracteristicas,
             plan.email
         ];

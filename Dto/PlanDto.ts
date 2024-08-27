@@ -12,11 +12,11 @@ class Plan {
         this._email = email
     }
         //Getters
-        get nombreChalet(): string{
+        get nombrePlan(): string{
             return this._nombrePlan
         }
     
-        get ubicacionChalet(): string{
+        get ubicacionPlan(): string{
             return this._ubicacionPlan
         }
 
@@ -29,11 +29,11 @@ class Plan {
         }
 
         //Setters
-        set nombreChalet(nombrePlan:string){
+        set nombrePlan(nombrePlan:string){
             this._nombrePlan = nombrePlan
         }
     
-        set ubicacionChalet(ubicacionPlan:string){
+        set ubicacionPlan(ubicacionPlan:string){
             this._ubicacionPlan = ubicacionPlan
         }
 
