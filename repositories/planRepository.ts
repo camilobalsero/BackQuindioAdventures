@@ -1,17 +1,16 @@
-import Chalet from '../Dto/ChaletDto';
-import ChaletImages from '../Dto/ChaletImagenesDto';
-import ServiciosChalet from '../Dto/ServiciosDto';
-import Tarifa from '../Dto/ChaletTarifasDto';
+import Plan from '../Dto/PlanDto';
+import PlanImages from '../Dto/PlanImagenesDto';
+import PlanTarifa from '../Dto/PlanTarifasDto';
 import db from '../config/config-db';
 
-class chaletRepository{
-    static async addChalet(chalet: Chalet): Promise<number> {
-        const sql = 'CALL insertarChalet(?, ?, ?, ?, @chalet_id)';
+class planRepository{
+    static async addPlan(plan: Plan): Promise<number> {
+        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @chalet_id)';
         const values = [
-            chalet.nombreChalet,
-            chalet.ubicacionChalet,
-            chalet.caracteristicas,
-            chalet.email
+            plan.nombreChalet,
+            plan.ubicacionChalet,
+            plan.caracteristicas,
+            plan.email
         ];
         
 
@@ -30,12 +29,11 @@ class chaletRepository{
         }
     }
     
-    static async addTarifa(chaletId: number, tarifa: Tarifa): Promise<void> {
-        const sql = 'CALL insertarTarifas(?, ?, ?, ?)';
+    static async addTarifa(planId: number, tarifa: PlanTarifa): Promise<void> {
+        const sql = '';
         const values = [
-            chaletId,
+            planId,
             tarifa.precio,
-            tarifa.tipo_habitacion,
             tarifa.temporada
         ];
 
@@ -49,22 +47,12 @@ class chaletRepository{
         }
     }
 
-    static async addChaletImage(chaletId: number ,imagenes: ChaletImages) {
-        const sql = 'INSERT INTO chalet_images (id_chalet, image) VALUES (?, ?)';
+    static async addPlanImage(planId: number ,imagenes: PlanImages) {
+        const sql = 'INSERT INTO planVacacional_images (id_planV_usuario, image) VALUES (?, ?)';
         const values = [
-            chaletId,
+            planId,
             imagenes.image
         ];
-        return db.execute(sql, values);
-    }
-
-    static async addServicioChalet(chaletId: number , servicios: ServiciosChalet) {
-        const sql = 'INSERT INTO chalet_servicios (chalet_id, servicio) VALUES (?, ?)';
-        const values = [
-            chaletId,
-            servicios.servicio
-        ];
-
         return db.execute(sql, values);
     }
 
@@ -103,4 +91,4 @@ class chaletRepository{
 
 }
 
-export default chaletRepository;
+export default planRepository;

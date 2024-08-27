@@ -16,6 +16,7 @@ import obtenerChalets from "./routes/getChalet"
 import obtenerChaletsId from "./routes/getChaletId"
 import obtenerTemporada from "./routes/temporadas"
 import chatbot from "./routes/chatbot";
+import createPlan from "./routes/crearPlan"
 
 // Middleware para parsear JSON y formularios
 app.use(bodyParser.json());
@@ -34,11 +35,12 @@ app.use('/createChalet', createChalet);
 app.use('/authAdmin', authAdmin);
 app.use('/chalet', obtenerChalets);
 app.use('/api', obtenerChaletsId);
-app.use('/chalet',obtenerChalets)
-app.use('/chaletId', obtenerChaletsId )
+app.use('/chalet',obtenerChalets);
+app.use('/chaletId', obtenerChaletsId );
 app.use('/reserva', reserva);
 app.use('/temporadas', obtenerTemporada);
-app.use('/chatbot', chatbot)
+app.use('/chatbot', chatbot);
+app.use('/createPlan', createPlan)
 
 const PORT = process.env.PORT || 10101;
 
