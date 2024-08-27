@@ -1,5 +1,5 @@
 import ReservesRepository from '../repositories/reservesRepository';
-import Reserva from '../Dto/ReservesDto';
+import Reserva from '../Dto/reservesDto';
 
 class ReservesService {
     public async createReserva(reserva: Reserva): Promise<number> {

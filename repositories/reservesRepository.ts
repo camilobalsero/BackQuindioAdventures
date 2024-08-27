@@ -1,6 +1,6 @@
 import { log } from 'console';
 import db from '../config/config-db';
-import Reserva from '../Dto/ReservesDto';
+import Reserva from '../Dto/reservesDto';
 
 class ReservesRepository {
     static async addReserva(reserva: Reserva): Promise<number> {

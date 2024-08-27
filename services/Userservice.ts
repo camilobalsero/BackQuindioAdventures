@@ -2,15 +2,10 @@ import UserRepository from '../repositories/UserRepository';
 import User from '../Dto/UserDto';
 import generateHash from '../helpers/generateHash';
 import Auth from '../Dto/AuthDto';
-import Reserva from '../Dto/ReservesDto';
 import UpdateUser from '../Dto/UpdateUserDto';
-import Tarifa from '../Dto/TarifasDto';
-import Chalet from '../Dto/ChaletDto';
-import ChaletImages from '../Dto/ImagenesDto';
 import bcrypt from "bcryptjs";
 import nodemailer from 'nodemailer';
 import UserRegister from '../Dto/UserRegisterDto';
-import ServiciosChalet from '../Dto/ServiciosDto';
 
 class UserService {
     

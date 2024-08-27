@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import ReservesService from '../services/reservesService';
-import Reserva from '../Dto/ReservesDto';
+import Reserva from '../Dto/reservesDto';
 
 const crearReserva = async (req: Request, res: Response) => {
     try {
