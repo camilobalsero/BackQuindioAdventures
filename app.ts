@@ -15,6 +15,7 @@ const app = express();
 import obtenerChalets from "./routes/getChalet"
 import obtenerChaletsId from "./routes/getChaletId"
 import obtenerTemporada from "./routes/temporadas"
+import chatbot from "./routes/chatbot";
 
 // Middleware para parsear JSON y formularios
 app.use(bodyParser.json());
@@ -37,7 +38,7 @@ app.use('/chalet',obtenerChalets)
 app.use('/chaletId', obtenerChaletsId )
 app.use('/reserva', reserva);
 app.use('/temporadas', obtenerTemporada);
-
+app.use('/chatbot', chatbot)
 
 const PORT = process.env.PORT || 10101;
 
