@@ -31,7 +31,7 @@ class chaletRepository{
     }
     
     static async addTarifa(chaletId: number, tarifa: Tarifa): Promise<void> {
-        const sql = 'CALL insertarTarifas(?, ?, ?, ?)';
+        const sql = 'CALL insertarTarifasChalet(?, ?, ?, ?)';
         const values = [
             chaletId,
             tarifa.precio,

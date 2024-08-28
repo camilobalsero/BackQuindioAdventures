@@ -24,7 +24,8 @@ const crearPlan = async (req: Request, res: Response) => {
 
         // Crear el objeto del chalet
         let plan: Plan = new Plan(nombre, ubicacion, descripcion,email);
-
+        console.log(plan,23456);
+        
         try {
             // Insertar el chalet en la base de datos
             const planId = await PlanService.addPlan(plan);
@@ -49,7 +50,7 @@ const crearPlan = async (req: Request, res: Response) => {
                 `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
             );
 
-            return res.status(201).send({ status: 'Chalet registrado exitosamente' });
+            return res.status(201).send({ status: 'Plan Vacacional registrado exitosamente' });
         } catch (error) {
             console.error("Error al registrar el chalet:", error);
             return res.status(500).send({ error: 'Error interno del servidor' });

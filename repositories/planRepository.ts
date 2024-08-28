@@ -5,7 +5,7 @@ import db from '../config/config-db';
 
 class planRepository{
     static async addPlan(plan: Plan): Promise<number> {
-        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @chalet_id)';
+        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @planV_id)';
         const values = [
             plan.nombrePlan,
             plan.ubicacionPlan,
@@ -19,10 +19,10 @@ class planRepository{
             await db.execute(sql, values);
 
             // Obtener el ID del chalet recién insertado
-            const [rows]: any = await db.execute('SELECT @chalet_id AS chalet_id');
-            const chaletId = rows[0].chalet_id;
+            const [rows]: any = await db.execute('SELECT @planV_id AS planV_id');
+            const planVId = rows[0].planV_id;
 
-            return chaletId;
+            return planVId;
         } catch (error) {
             console.error("Error en la ejecución del procedimiento almacenado:", error);
             throw error;
@@ -30,7 +30,7 @@ class planRepository{
     }
     
     static async addTarifa(planId: number, tarifa: PlanTarifa): Promise<void> {
-        const sql = '';
+        const sql = 'CALL insertarTarifasPlan(?, ?, ?)';
         const values = [
             planId,
             tarifa.precio,
