@@ -6,9 +6,10 @@ import db from '../config/config-db';
 
 class chaletRepository{
     static async addChalet(chalet: Chalet): Promise<number> {
-        const sql = 'CALL insertarChalet(?, ?, ?, ?, @chalet_id)';
+        const sql = 'CALL insertarChalet(?, ?, ?, ?, ?, @chalet_id)';
         const values = [
             chalet.nombreChalet,
+            chalet.municipioChalet,
             chalet.ubicacionChalet,
             chalet.caracteristicas,
             chalet.email

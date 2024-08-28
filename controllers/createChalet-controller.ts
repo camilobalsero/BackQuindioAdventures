@@ -15,7 +15,8 @@ const crearChalet = async (req: Request, res: Response) => {
             nombre,
             servicios,
             tarifas,
-            ubicacion
+            ubicacion,
+            municipio
         } = req.body;
 
         console.log(req.body);
@@ -25,7 +26,7 @@ const crearChalet = async (req: Request, res: Response) => {
         const email = res.locals.user.email;
 
         // Crear el objeto del chalet
-        let chalet: Chalet = new Chalet(nombre, ubicacion, descripcion,email);
+        let chalet: Chalet = new Chalet(nombre, municipio, ubicacion, descripcion,email);
 
         try {
             // Insertar el chalet en la base de datos

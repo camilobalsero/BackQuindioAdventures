@@ -1,12 +1,14 @@
 class Plan {
     _nombrePlan: string;
+    _municipio: string;
     _ubicacionPlan: string;
     _caracteristicas:string;
     _email:string
     constructor(
-        nombrePlan: string, ubicacionPlan: string, caracteristicas: string, email:string
+        nombrePlan: string, municipio:string, ubicacionPlan: string, caracteristicas: string, email:string
     ) {
         this._nombrePlan = nombrePlan,
+        this._municipio = municipio,
         this._ubicacionPlan = ubicacionPlan,
         this._caracteristicas= caracteristicas,
         this._email = email
@@ -14,6 +16,10 @@ class Plan {
         //Getters
         get nombrePlan(): string{
             return this._nombrePlan
+        }
+
+        get municipioPlan(): string{
+            return this._municipio
         }
     
         get ubicacionPlan(): string{
@@ -31,6 +37,10 @@ class Plan {
         //Setters
         set nombrePlan(nombrePlan:string){
             this._nombrePlan = nombrePlan
+        }
+
+        set municipioPlan(municipio:string){
+            this._municipio = municipio
         }
     
         set ubicacionPlan(ubicacionPlan:string){

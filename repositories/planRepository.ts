@@ -5,9 +5,10 @@ import db from '../config/config-db';
 
 class planRepository{
     static async addPlan(plan: Plan): Promise<number> {
-        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @planV_id)';
+        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, ?, @planV_id)';
         const values = [
             plan.nombrePlan,
+            plan.municipioPlan,
             plan.ubicacionPlan,
             plan.caracteristicas,
             plan.email
@@ -30,11 +31,13 @@ class planRepository{
     }
     
     static async addTarifa(planId: number, tarifa: PlanTarifa): Promise<void> {
-        const sql = 'CALL insertarTarifasPlan(?, ?, ?)';
+        const sql = 'CALL insertarTarifasPlan(?, ?, ?, ?, ?)';
         const values = [
             planId,
             tarifa.precio,
-            tarifa.temporada
+            tarifa.temporada,
+            tarifa.hora_salida,
+            tarifa.hora_llegada
         ];
 
         

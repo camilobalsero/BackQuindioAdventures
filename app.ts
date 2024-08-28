@@ -35,7 +35,6 @@ app.use('/createChalet', createChalet);
 app.use('/authAdmin', authAdmin);
 app.use('/chalet', obtenerChalets);
 app.use('/api', obtenerChaletsId);
-app.use('/chalet',obtenerChalets);
 app.use('/chaletId', obtenerChaletsId );
 app.use('/reserva', reserva);
 app.use('/temporadas', obtenerTemporada);

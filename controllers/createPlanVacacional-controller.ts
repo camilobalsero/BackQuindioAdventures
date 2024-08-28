@@ -13,36 +13,30 @@ const crearPlan = async (req: Request, res: Response) => {
             imagenes,
             nombre,
             tarifas,
-            ubicacion
+            ubicacion,
+            municipio
         } = req.body;
-
-        console.log(req.body);
         
 
-        // Recupera el email del usuario autenticado
         const email = res.locals.user.email;
 
-        // Crear el objeto del chalet
-        let plan: Plan = new Plan(nombre, ubicacion, descripcion,email);
-        console.log(plan,23456);
-        
+        let plan: Plan = new Plan(nombre, municipio, ubicacion, descripcion,email);
+
         try {
-            // Insertar el chalet en la base de datos
             const planId = await PlanService.addPlan(plan);
 
-            // Insertar las tarifas asociadas al chalet
             for (const tarifa of tarifas) {
-                let newTarifa: PlanTarifa = new PlanTarifa(planId, tarifa.precio, tarifa.temporada);
+                let newTarifa: PlanTarifa = new PlanTarifa(planId, tarifa.precio, tarifa.temporada, tarifa.horaSalida, tarifa.horaLlegada);
+                console.log(newTarifa,12345);
+                
                 await PlanService.addTarifa(newTarifa);
             }
 
-            // Insertar las imágenes asociadas al chalet
             for (const imagen of imagenes) {
                 let newImagen: PlanImages = new PlanImages(planId, imagen);
                 await PlanService.addPlanImage(newImagen);
             }
 
-            // Enviar correo de confirmación
             await mailerService.sendEmail(
                 email,
                 "Haz registrado tu chalet exitosamente ✔",

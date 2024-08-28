@@ -1,12 +1,15 @@
 class Chalet {
     _nombreChalet: string;
+    _municipioChalet: string;
     _ubicacionChalet: string;
     _caracteristicas:string;
     _email:string
     constructor(
-        nombreChalet: string, ubicacionChalet: string, caracteristicas: string, email:string
+        nombreChalet: string, municipioChalet:string, ubicacionChalet: string, caracteristicas: 
+        string, email:string
     ) {
         this._nombreChalet = nombreChalet,
+        this._municipioChalet = municipioChalet,
         this._ubicacionChalet= ubicacionChalet,
         this._caracteristicas= caracteristicas,
         this._email = email
@@ -14,6 +17,10 @@ class Chalet {
         //Getters
         get nombreChalet(): string{
             return this._nombreChalet
+        }
+
+        get municipioChalet(): string{
+            return this._municipioChalet
         }
     
         get ubicacionChalet(): string{
@@ -31,6 +38,10 @@ class Chalet {
         //Setters
         set nombreChalet(nombreChalet:string){
             this._nombreChalet = nombreChalet
+        }
+
+        set municipioChalet(municipioChalet:string){
+            this._municipioChalet = municipioChalet
         }
     
         set ubicacionChalet(ubicacionChalet:string){
