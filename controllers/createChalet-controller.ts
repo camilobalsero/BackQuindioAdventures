@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import mailerService from '../services/mailerService';
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
-import Tarifa from '../Dto/TarifasDto';
-import ChaletImages from '../Dto/ImagenesDto';
+import ChaletTarifa from '../Dto/ChaletTarifasDto';
+import ChaletImages from '../Dto/ChaletImagenesDto';
 import ServiciosChalet from '../Dto/ServiciosDto';
 import ChaletService from '../services/chaletService';
 
@@ -33,7 +33,7 @@ const crearChalet = async (req: Request, res: Response) => {
 
             // Insertar las tarifas asociadas al chalet
             for (const tarifa of tarifas) {
-                let newTarifa: Tarifa = new Tarifa(chaletId, tarifa.precio, tarifa.tipohabitacion, tarifa.temporada);
+                let newTarifa: ChaletTarifa = new ChaletTarifa(chaletId, tarifa.precio, tarifa.tipohabitacion, tarifa.temporada);
                 await ChaletService.addTarifa(newTarifa);
             }
 

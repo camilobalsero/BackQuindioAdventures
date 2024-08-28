@@ -1,25 +1,22 @@
-import Tarifa from '../Dto/ChaletTarifasDto';
-import Chalet from '../Dto/ChaletDto';
-import ChaletImages from '../Dto/ChaletImagenesDto';
-import ServiciosChalet from '../Dto/ServiciosDto';
+import PlanTarifa from '../Dto/PlanTarifasDto';
+import Plan from '../Dto/PlanDto';
 import chaletRepository from '../repositories/chaletRepository';
+import PlanImages from '../Dto/PlanImagenesDto';
+import planRepository from '../repositories/planRepository';
 
-class chaletService{
-    static async addChalet(chalet: Chalet) {
-        return await chaletRepository.addChalet(chalet);
+class planService{
+    static async addPlan(plan: Plan) {
+        return await planRepository.addPlan(plan);
     }
 
-    static async addTarifa(tarifa: Tarifa) {
-        return await chaletRepository.addTarifa(tarifa._id_chalet_usuario, tarifa);
+    static async addTarifa(tarifa: PlanTarifa) {
+        return await planRepository.addTarifa(tarifa._id_plan_usuario, tarifa);
     }
 
-    static async addChaletImage(imagenes: ChaletImages) {
-        return await chaletRepository.addChaletImage(imagenes._id_chalet, imagenes);
+    static async addPlanImage(imagenes: PlanImages) {
+        return await planRepository.addPlanImage(imagenes._id_plan, imagenes);
     }
 
-    static async addServicioChalet(servicios: ServiciosChalet) {
-        return await chaletRepository.addServicioChalet(servicios._id_chalet, servicios);
-    }
 
     static async getChalet(): Promise<any> {
         try {
@@ -54,4 +51,4 @@ class chaletService{
     }
 }
 
-export default chaletService;
+export default planService;
