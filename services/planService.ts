@@ -30,22 +30,22 @@ class planService{
         }
     }
 
-    static async getAllChalets(): Promise<any[]> {
+    static async getAllPlans(): Promise<any[]> {
         try {
-            const chalets = await chaletRepository.getAllChalets();
-            return chalets;
+            const plans = await planRepository.getAllPlans();
+            return plans;
         } catch (error) {
-            console.error("Error en chaletService al obtener chalets:", error);
+            console.error("Error en planService al obtener planes:", error);
             throw error;
         }
     }
 
-    static async getChaletById(chaletId: number) {
+    static async getPlanById(planId: number) {
         try {
-            const chalet = await chaletRepository.getChaletById(chaletId);
-            return chalet;
+            const plan = await planRepository.getPlanById(planId);
+            return plan;
         } catch (error) {
-            console.error("Error en chaletService al obtener chalet por ID:", error);
+            console.error("Error en planService al obtener plan por ID:", error);
             throw error;
         }
     }
