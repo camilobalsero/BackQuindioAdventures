@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import register from './routes/register';
-
 import auth from './routes/auth';
 import reserva from './routes/reserva';
 import reestablecer from './routes/reestablecer';
@@ -17,10 +16,10 @@ import obtenerChaletsId from './routes/getChaletId';
 import obtenerTemporada from './routes/temporadas';
 import chatbot from './routes/chatbot';
 import paymentRoutes from './routes/payment';
-
 import createPlan from "./routes/crearPlan"
 import obtenerPlanes from "./routes/getPlan";
-import obtenerPlanPorId from './routes/getPlanId'
+import obtenerPlanPorId from './routes/getPlanId';
+import obtenerTodosLosUsuarios from './routes/getUsuarios'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -48,6 +47,7 @@ app.use('/chaletId', obtenerChaletsId );
 app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
+app.use('/usuarios', obtenerTodosLosUsuarios);
 
 
 const PORT = process.env.PORT || 10101;
