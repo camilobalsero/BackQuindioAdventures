@@ -1,5 +1,5 @@
 // src/services/mailerService.ts
-import transporter from "../config/mailer";
+/*import transporter from "../config/mailer";
 import User from "../Dto/UserDto"
 class mailerService {
     static async sendEmail(to: string, subject: string, text: string, html: string) {
@@ -22,3 +22,20 @@ class mailerService {
   }
   
   export default mailerService;
+
+  */
+
+  import axios from 'axios';
+
+  const sendEmail = async (emailData: any) => {
+    try {
+      const response = await axios.post('http://localhost:7071/api/httpTrigger1', emailData);  // La URL debe coincidir con el servicio de Azure
+      return response.data;
+    } catch (error) {
+      console.error('Error al enviar el correo:', error);
+      throw error;
+    }
+  };
+  
+  export default sendEmail;
+  
