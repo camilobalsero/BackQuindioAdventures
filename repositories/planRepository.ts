@@ -5,13 +5,14 @@ import db from '../config/config-db';
 
 class planRepository{
     static async addPlan(plan: Plan): Promise<number> {
-        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, ?, @planV_id)';
+        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, ?, ?, @planV_id)';
         const values = [
             plan.nombrePlan,
             plan.municipioPlan,
             plan.ubicacionPlan,
             plan.caracteristicas,
-            plan.email
+            plan.email,
+            plan.fechaRegistro
         ];
         
 

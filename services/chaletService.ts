@@ -52,6 +52,16 @@ class chaletService{
             throw error;
         }
     }
+
+    static async getChaletsByEmail(email: string) {
+        try {
+            const chalets = await chaletRepository.getChaletsByEmail(email);
+            return chalets;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalet por ID:", error);
+            throw error;
+        }
+    }
 }
 
 export default chaletService;

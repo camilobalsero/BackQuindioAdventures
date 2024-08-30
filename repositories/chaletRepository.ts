@@ -6,13 +6,14 @@ import db from '../config/config-db';
 
 class chaletRepository{
     static async addChalet(chalet: Chalet): Promise<number> {
-        const sql = 'CALL insertarChalet(?, ?, ?, ?, ?, @chalet_id)';
+        const sql = 'CALL insertarChalet(?, ?, ?, ?, ?, ?, @chalet_id)';
         const values = [
             chalet.nombreChalet,
             chalet.municipioChalet,
             chalet.ubicacionChalet,
             chalet.caracteristicas,
-            chalet.email
+            chalet.email,
+            chalet.fechaRegistro
         ];
         
 
@@ -95,6 +96,18 @@ class chaletRepository{
         
         try {
             const [rows]: any = await db.execute(sql, [chaletId]);
+            return rows[0]; // Regresamos el chalet encontrado
+        } catch (error) {
+            console.error("Error en obtenerChaletPorId:", error);
+            throw error;
+        }
+    }
+
+    static async getChaletsByEmail(email: string) {
+        const sql = 'CALL obtenerChaletPorEmail(?)';
+        
+        try {
+            const [rows]: any = await db.execute(sql, [email]);
             return rows[0]; // Regresamos el chalet encontrado
         } catch (error) {
             console.error("Error en obtenerChaletPorId:", error);

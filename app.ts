@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import register from './routes/register';
-
 import auth from './routes/auth';
 import reserva from './routes/reserva';
 import reestablecer from './routes/reestablecer';
@@ -17,10 +16,10 @@ import obtenerChaletsId from './routes/getChaletId';
 import obtenerTemporada from './routes/temporadas';
 import chatbot from './routes/chatbot';
 import paymentRoutes from './routes/payment';
-
-import createPlan from "./routes/crearPlan"
+import createPlan from "./routes/crearPlan";
 import obtenerPlanes from "./routes/getPlan";
-import obtenerPlanPorId from './routes/getPlanId'
+import obtenerPlanPorId from './routes/getPlanId';
+import chaletEmail from './routes/getChaletEmail'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -31,20 +30,21 @@ app.use(cors());
 // Registro de rutas
 app.use('/register', register);
 app.use('/auth', auth);
+app.use('/authAdmin', authAdmin);
 app.use('/reestablecer', reestablecer);
 app.use('/envioCorreoCambioContrasena', solicitarCambio);
 app.use('/user', profile);
 app.use('/updateProfile', actualizarPerfil);
 app.use('/api/images', imageRoutes);
 app.use('/createChalet', createChalet);
-app.use('/authAdmin', authAdmin);
 app.use('/chalet', obtenerChalets);
+app.use('/chaletId', obtenerChaletsId );
+app.use('/chaletEmail', chaletEmail)
 app.use('/api', obtenerChaletsId);
 app.use('/reserva', reserva);
 app.use('/temporadas', obtenerTemporada);
 app.use('/chatbot', chatbot);
 app.use('/api', paymentRoutes);  // Asegúrate de que esta ruta no sobrescriba otras
-app.use('/chaletId', obtenerChaletsId );
 app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);

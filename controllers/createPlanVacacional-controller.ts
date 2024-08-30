@@ -17,10 +17,11 @@ const crearPlan = async (req: Request, res: Response) => {
             municipio
         } = req.body;
         
+        const fechaRegistro = new Date().toISOString().split('T')[0];
 
         const email = res.locals.user.email;
 
-        let plan: Plan = new Plan(nombre, municipio, ubicacion, descripcion,email);
+        let plan: Plan = new Plan(nombre, municipio, ubicacion, descripcion,email, fechaRegistro);
 
         try {
             const planId = await PlanService.addPlan(plan);
