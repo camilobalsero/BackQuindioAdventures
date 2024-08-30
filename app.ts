@@ -16,10 +16,11 @@ import obtenerChaletsId from './routes/getChaletId';
 import obtenerTemporada from './routes/temporadas';
 import chatbot from './routes/chatbot';
 import paymentRoutes from './routes/payment';
-import createPlan from "./routes/crearPlan";
+import chaletEmail from './routes/getChaletEmail'
+import createPlan from "./routes/crearPlan"
 import obtenerPlanes from "./routes/getPlan";
 import obtenerPlanPorId from './routes/getPlanId';
-import chaletEmail from './routes/getChaletEmail'
+import obtenerTodosLosUsuarios from './routes/getUsuarios'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -48,6 +49,7 @@ app.use('/api', paymentRoutes);  // Asegúrate de que esta ruta no sobrescriba o
 app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
+app.use('/usuarios', obtenerTodosLosUsuarios);
 
 
 const PORT = process.env.PORT || 10101;

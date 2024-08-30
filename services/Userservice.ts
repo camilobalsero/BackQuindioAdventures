@@ -130,5 +130,15 @@ class UserService {
         });
     }
 
+    static async obtenerTodosLosUsuarios():  Promise<any[]>{
+        try{
+            const users = await UserRepository.getAllUsers();
+            return users;
+        }catch(error){
+            console.error("Error en el UserService al obtener usuarios:", error);
+            throw error
+        }
+    }
+
 }
 export default UserService;

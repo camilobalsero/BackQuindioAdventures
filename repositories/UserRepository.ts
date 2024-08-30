@@ -110,6 +110,17 @@ class UserRepository {
             throw error;
         }
     }
+
+    static async getAllUsers(){
+        const sql = 'CALL obtenerTodosLosUsuarios()';
+        try {
+            const [rows]: any = await db.execute(sql);
+            return rows[0];
+        } catch(error){
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
+            throw error;
+        }
+    }
 }
 
 
