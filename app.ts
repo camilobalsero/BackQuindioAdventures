@@ -20,7 +20,9 @@ import chaletEmail from './routes/getChaletEmail'
 import createPlan from "./routes/crearPlan"
 import obtenerPlanes from "./routes/getPlan";
 import obtenerPlanPorId from './routes/getPlanId';
-import obtenerTodosLosUsuarios from './routes/getUsuarios'
+import obtenerTodosLosUsuarios from './routes/getUsuarios';
+import activarUsuario from './routes/activarUsuario';
+import desactivarUsuario from './routes/desactivarUsuario'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -50,6 +52,8 @@ app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
 app.use('/usuarios', obtenerTodosLosUsuarios);
+app.use('/activarUsuario', activarUsuario);
+app.use('/desactivarUsuario', desactivarUsuario);
 
 
 const PORT = process.env.PORT || 10101;
