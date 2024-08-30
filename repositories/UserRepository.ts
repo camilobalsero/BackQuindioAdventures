@@ -46,25 +46,6 @@ class UserRepository {
             console.error("Error al llamar al procedimiento almacenado obtenerPasswordPorEmail:", error);
             throw error;
         }
-    }
-
-    static async loginAdmin(auth: Auth) {
-        const sql = 'CALL authAdmin(?)';
-        const values = [auth.email];
-    
-        try {
-            const [rows]: any = await db.execute(sql, values);
-            console.log('Resultado de la consulta:', rows);
-            const passwordRows = rows[0];
-        
-            if (passwordRows && passwordRows.length > 0) {
-                return passwordRows[0].password;
-            } else {
-                return { logged: false, status: "Incorrect username or password" };
-            }
-        } catch (error) {
-            return { logged: false, status: "Incorrect username or password" };
-        }
     }    
     
     static async resetPassword(email: string, newPasswordHash: string) {
@@ -107,6 +88,17 @@ class UserRepository {
             return result;
         } catch (error) {
             console.error("Error al llamar al procedimiento almacenado actualizarUsuario:", error);
+            throw error;
+        }
+    }
+
+    static async getAllUsers(){
+        const sql = 'CALL obtenerTodosLosUsuarios()';
+        try {
+            const [rows]: any = await db.execute(sql);
+            return rows[0];
+        } catch(error){
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
             throw error;
         }
     }

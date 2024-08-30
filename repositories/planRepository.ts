@@ -5,12 +5,14 @@ import db from '../config/config-db';
 
 class planRepository{
     static async addPlan(plan: Plan): Promise<number> {
-        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, @planV_id)';
+        const sql = 'CALL insertarPlanVacacional(?, ?, ?, ?, ?, ?, @planV_id)';
         const values = [
             plan.nombrePlan,
+            plan.municipioPlan,
             plan.ubicacionPlan,
             plan.caracteristicas,
-            plan.email
+            plan.email,
+            plan.fechaRegistro
         ];
         
 
@@ -30,11 +32,13 @@ class planRepository{
     }
     
     static async addTarifa(planId: number, tarifa: PlanTarifa): Promise<void> {
-        const sql = 'CALL insertarTarifasPlan(?, ?, ?)';
+        const sql = 'CALL insertarTarifasPlan(?, ?, ?, ?, ?)';
         const values = [
             planId,
             tarifa.precio,
-            tarifa.temporada
+            tarifa.temporada,
+            tarifa.hora_salida,
+            tarifa.hora_llegada
         ];
 
         
@@ -56,8 +60,8 @@ class planRepository{
         return db.execute(sql, values);
     }
 
-    static async getChalet(){
-        const sql = `CALL obtenerTodosLosChalets()`;
+    static async getPlan(){
+        const sql = `CALL obtenerTodosLosPlanes()`;
         try {
             await db.execute(sql);
         } catch (error) {
@@ -66,8 +70,8 @@ class planRepository{
         }
     }
 
-    static async getAllChalets(): Promise<any[]> {
-        const sql = `CALL obtenerTodosLosChalets()`;
+    static async getAllPlans(): Promise<any[]> {
+        const sql = `CALL obtenerTodosLosPlanes()`;
         try {
             const [rows]: any = await db.execute(sql);
             return rows[0]; // Retorna los chalets desde la primera fila del resultado
@@ -77,14 +81,14 @@ class planRepository{
         }
     }
 
-    static async getChaletById(chaletId: number) {
-        const sql = 'CALL obtenerChaletPorId(?)';
+    static async getPlanById(planId: number) {
+        const sql = 'CALL obtenerPlanPorId(?)';
         
         try {
-            const [rows]: any = await db.execute(sql, [chaletId]);
+            const [rows]: any = await db.execute(sql, [planId]);
             return rows[0]; // Regresamos el chalet encontrado
         } catch (error) {
-            console.error("Error en obtenerChaletPorId:", error);
+            console.error("Error en obtenerPlanPorId:", error);
             throw error;
         }
     }
