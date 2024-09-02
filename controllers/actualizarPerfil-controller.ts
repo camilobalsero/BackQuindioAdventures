@@ -20,7 +20,7 @@ let actualizarPerfil = async (req: Request, res: Response) => {
         
         await UserService.updateUserProfile(updateUser); 
 
-        try {
+        /* try {
             await mailerService.sendEmail(
                 email,
                 "Actualización de perfil exitosa ✔",
@@ -30,6 +30,7 @@ let actualizarPerfil = async (req: Request, res: Response) => {
         } catch (error) {
             console.error("Error al enviar el correo de confirmación:", error);
         }
+         */
 
         return res.status(200).send({ status: 'Perfil actualizado correctamente' });
     } catch (error: any) {

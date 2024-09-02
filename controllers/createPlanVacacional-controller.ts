@@ -38,12 +38,16 @@ const crearPlan = async (req: Request, res: Response) => {
                 await PlanService.addPlanImage(newImagen);
             }
 
+            /*
+
             await mailerService.sendEmail(
                 email,
                 "Haz registrado tu chalet exitosamente ✔",
                 `Hola, bienvenido a nuestro servicios`,
                 `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
             );
+            
+            */
 
             return res.status(201).send({ status: 'Plan Vacacional registrado exitosamente' });
         } catch (error) {

@@ -24,7 +24,14 @@ const isRelevantQuestion = (question: string): boolean => {
 };
 
 router.post('/', async (req, res) => {
-  const { history, question } = req.body;
+  const { question } = req.body;
+
+  const history = [
+    {
+      "role": "user",
+      "parts": "Esta es una conversación sobre chalets disponibles en QuindioAdventures."
+    }
+  ]
 
   // Verificación de que 'history' y 'question' no sean indefinidos
   if (!history || !question) {
