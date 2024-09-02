@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import  chaletService  from '../services/chaletService'
 
-const obtenerPlanPorId = async (req: Request, res: Response) =>{
+const obtenerChaletsPorEmail = async (req: Request, res: Response) =>{
     try{
         const email = res.locals.user.email;
         if(!email){
@@ -23,4 +23,4 @@ const obtenerPlanPorId = async (req: Request, res: Response) =>{
     }
 }
 
-export default obtenerPlanPorId;
+export default obtenerChaletsPorEmail;

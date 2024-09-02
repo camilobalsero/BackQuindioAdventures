@@ -93,6 +93,17 @@ class planRepository{
         }
     }
 
+    static async getPlanesByEmail(email: string) {
+        const sql = 'CALL obtenerPlanPorEmail(?)';
+        
+        try {
+            const [rows]: any = await db.execute(sql, [email]);
+            return rows[0];
+        } catch (error) {
+            console.error("Error en obtenerPlanesPorEmail:", error);
+            throw error;
+        }
+    }
 }
 
 export default planRepository;
