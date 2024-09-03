@@ -69,7 +69,6 @@ class UserRepository {
         }
     }
 
-
     static async updateUser(user: UpdateUser) {
         const sql = 'CALL actualizarUsuario(?, ?, ?, ?, ?, ?, ?)';
         const values = [
@@ -102,6 +101,7 @@ class UserRepository {
             throw error;
         }
     }
+
 }
 
 

@@ -62,6 +62,10 @@ class chaletService{
             throw error;
         }
     }
+
+    static async eliminarChalet(id: number) {
+        return await chaletRepository.eliminarChalet(id);
+    }
 }
 
 export default chaletService;
