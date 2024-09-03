@@ -17,7 +17,7 @@ export default db.promise()
 const API_KEY_GEMINI = process.env.KEY_GEMINI;
 const GENERATION_CONFIG = {
   stopSequences: ["red"],
-  maxOutputTokens: 500,
+  maxOutputTokens: 200,
   temperature: 0.9,
   topP: 0.1,
   topK: 16,

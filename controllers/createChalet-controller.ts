@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import mailerService from '../services/mailerService';
+import sendEmail from "../services/mailerService";
 import Chalet from '../Dto/ChaletDto';
 import validateToken from '../middleware/validateToken';
 import ChaletTarifa from '../Dto/ChaletTarifasDto';
@@ -52,12 +52,16 @@ const crearChalet = async (req: Request, res: Response) => {
             }
 
             // Enviar correo de confirmación
-            /*await mailerService.sendEmail(
-                email,
-                "Haz registrado tu chalet exitosamente ✔",
-                `Hola, bienvenido a nuestro servicios`,
-                `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
-            );*/
+
+            const emailData = {
+                subject: 'Haz creado un chalet exitosamente',
+                to: email, 
+                dataTemplate: { nombre: nombre },  
+                templateName: 'crearChalet.html',
+              };
+          
+              // Enviar el correo usando el servicio de Azure
+              await sendEmail(emailData);
 
             return res.status(201).send({ status: 'Chalet registrado exitosamente' });
         } catch (error) {

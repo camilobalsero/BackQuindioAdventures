@@ -25,6 +25,7 @@ import obtenerTodosLosUsuarios from './routes/getUsuarios';
 import activarUsuario from './routes/activarUsuario';
 import desactivarUsuario from './routes/desactivarUsuario';
 import eliminarChalet from './routes/eliminarChalet';
+import eliminarPlan from './routes/eliminarPlanVacacional';
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -58,7 +59,7 @@ app.use('/usuarios', obtenerTodosLosUsuarios);
 app.use('/activarUsuario', activarUsuario);
 app.use('/desactivarUsuario', desactivarUsuario);
 app.use('/eliminarChalet', eliminarChalet)
-
+app.use('/eliminarPlan', eliminarPlan)
 
 const PORT = process.env.PORT || 10101;
 

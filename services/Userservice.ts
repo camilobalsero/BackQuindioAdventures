@@ -98,7 +98,7 @@ class UserService {
             <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto; color: #000;">
             <h2 style="color: #418E6D;">¡Cambio de Contraseña!</h2>
             <p>Bienvenido a nuestros servicios exclusivos de <strong>QuindioAdventures</strong>. Estamos aquí para asegurarnos de que tengas las mejores experiencias durante tu aventura con nosotros.</p>
-            <p>Si necesitas cambiar tu contraseña da click aqui:</p>
+            <p>Si necesitas cambiar tu contraseña da click aqui:</p> 
             <a href="${resetLink}" style="display: inline-block; background-color: #418E6D; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Cambia tu contraseña</a>
             <p style="font-size: 14px; color: #000; margin-top: 20px;">Saludos,<br>El equipo de QuindioAdventures</p>
             </div>

@@ -1,7 +1,7 @@
 import UpdateUser from '../Dto/UpdateUserDto';
 import { Request, Response } from "express";
 import UserService from '../services/Userservice';
-import mailerService from '../services/mailerService';
+import sendEmail from "../services/mailerService";
 
 let actualizarPerfil = async (req: Request, res: Response) => {
     try {
@@ -20,16 +20,16 @@ let actualizarPerfil = async (req: Request, res: Response) => {
         
         await UserService.updateUserProfile(updateUser); 
 
-        /*try {
-            await mailerService.sendEmail(
-                email,
-                "Actualización de perfil exitosa ✔",
-                `Hola ${name}, tu perfil ha sido actualizado con éxito!`,
-                `Hola ${name}, tu perfil en QuindioAdventures ha sido actualizado satisfactoriamente.`
-            );
-        } catch (error) {
-            console.error("Error al enviar el correo de confirmación:", error);
-        }*/
+
+        const emailData = {
+            subject: 'Haz actualizado tu perfil exitosamente',
+            to: email, 
+            dataTemplate: { name: name },  
+            templateName: 'actualizarPerfil.html',
+          };
+      
+          // Enviar el correo usando el servicio de Azure
+          await sendEmail(emailData);
 
         return res.status(200).send({ status: 'Perfil actualizado correctamente' });
     } catch (error: any) {

@@ -5,6 +5,7 @@ import PlanTarifa from '../Dto/PlanTarifasDto';
 import Plan from '../Dto/PlanDto';
 import PlanImages from '../Dto/PlanImagenesDto';
 import PlanService from '../services/planService';
+import sendEmail from '../services/mailerService';
 
 const crearPlan = async (req: Request, res: Response) => {
     try {
@@ -38,12 +39,17 @@ const crearPlan = async (req: Request, res: Response) => {
                 await PlanService.addPlanImage(newImagen);
             }
 
-            /*await mailerService.sendEmail(
-                email,
-                "Haz registrado tu chalet exitosamente ✔",
-                `Hola, bienvenido a nuestro servicios`,
-                `Hola, Bienvenido a nuestro servicio de QuindioAdventures`
-            );*/
+
+            const emailData = {
+                subject: 'Haz creado un plan vacacional exitosamente',
+                to: email, 
+                dataTemplate: { nombre: nombre },  
+                templateName: 'crearPlan.html',
+              };
+          
+              // Enviar el correo usando el servicio de Azure
+              await sendEmail(emailData);
+
 
             return res.status(201).send({ status: 'Plan Vacacional registrado exitosamente' });
         } catch (error) {

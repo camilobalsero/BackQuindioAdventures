@@ -93,6 +93,14 @@ class planRepository{
         }
     }
 
+
+    static async eliminarPlan(id:number){
+        const sql = 'CALL eliminarPlanVacacional(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
+
     static async getPlanesByEmail(email: string) {
         const sql = 'CALL obtenerPlanPorEmail(?)';
         

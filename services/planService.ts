@@ -3,6 +3,7 @@ import Plan from '../Dto/PlanDto';
 import PlanImages from '../Dto/PlanImagenesDto';
 import planRepository from '../repositories/planRepository';
 
+
 class planService{
     static async addPlan(plan: Plan) {
         return await planRepository.addPlan(plan);
@@ -36,6 +37,10 @@ class planService{
         }
     }
 
+    static async eliminarPlan(id: number) {
+        return await planRepository.eliminarPlan(id);
+    }
+    
     static async getPlanesByEmail(email: string) {
         try {
             const chalets = await planRepository.getPlanesByEmail(email);
