@@ -93,6 +93,7 @@ class planRepository{
         }
     }
 
+
     static async eliminarPlan(id:number){
         const sql = 'CALL eliminarPlanVacacional(?)';
         const values = [id]
@@ -100,6 +101,17 @@ class planRepository{
         return db.execute(sql, values);
     }
 
+    static async getPlanesByEmail(email: string) {
+        const sql = 'CALL obtenerPlanPorEmail(?)';
+        
+        try {
+            const [rows]: any = await db.execute(sql, [email]);
+            return rows[0];
+        } catch (error) {
+            console.error("Error en obtenerPlanesPorEmail:", error);
+            throw error;
+        }
+    }
 }
 
 export default planRepository;

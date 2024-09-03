@@ -1,6 +1,5 @@
 import PlanTarifa from '../Dto/PlanTarifasDto';
 import Plan from '../Dto/PlanDto';
-import chaletRepository from '../repositories/chaletRepository';
 import PlanImages from '../Dto/PlanImagenesDto';
 import planRepository from '../repositories/planRepository';
 
@@ -16,19 +15,6 @@ class planService{
 
     static async addPlanImage(imagenes: PlanImages) {
         return await planRepository.addPlanImage(imagenes._id_plan, imagenes);
-    }
-
-
-    static async getChalet(): Promise<any> {
-        try {
-            const chalets = await chaletRepository.getChalet();
-            console.log(chalets);
-            
-            return chalets;
-        } catch (error) {
-            console.error("Error en ChaletService:", error);
-            throw error;
-        }
     }
 
     static async getAllPlans(): Promise<any[]> {
@@ -53,6 +39,16 @@ class planService{
 
     static async eliminarPlan(id: number) {
         return await planRepository.eliminarPlan(id);
+    }
+    
+    static async getPlanesByEmail(email: string) {
+        try {
+            const chalets = await planRepository.getPlanesByEmail(email);
+            return chalets;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalet por ID:", error);
+            throw error;
+        }
     }
 }
 

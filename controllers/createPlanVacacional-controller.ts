@@ -39,6 +39,7 @@ const crearPlan = async (req: Request, res: Response) => {
                 await PlanService.addPlanImage(newImagen);
             }
 
+
             const emailData = {
                 subject: 'Haz creado un plan vacacional exitosamente',
                 to: email, 
@@ -48,6 +49,7 @@ const crearPlan = async (req: Request, res: Response) => {
           
               // Enviar el correo usando el servicio de Azure
               await sendEmail(emailData);
+
 
             return res.status(201).send({ status: 'Plan Vacacional registrado exitosamente' });
         } catch (error) {

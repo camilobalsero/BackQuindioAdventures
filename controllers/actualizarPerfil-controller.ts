@@ -20,6 +20,7 @@ let actualizarPerfil = async (req: Request, res: Response) => {
         
         await UserService.updateUserProfile(updateUser); 
 
+
         const emailData = {
             subject: 'Haz actualizado tu perfil exitosamente',
             to: email, 

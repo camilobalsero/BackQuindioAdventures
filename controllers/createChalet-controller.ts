@@ -52,6 +52,7 @@ const crearChalet = async (req: Request, res: Response) => {
             }
 
             // Enviar correo de confirmación
+
             const emailData = {
                 subject: 'Haz creado un chalet exitosamente',
                 to: email, 

@@ -18,6 +18,7 @@ import chatbot from './routes/chatbot';
 import paymentRoutes from './routes/payment';
 import createPlan from "./routes/crearPlan"
 import chaletEmail from './routes/getChaletEmail'
+import planEmail from './routes/getPlanEmail'
 import obtenerPlanes from "./routes/getPlan";
 import obtenerPlanPorId from './routes/getPlanId';
 import obtenerTodosLosUsuarios from './routes/getUsuarios';
@@ -52,6 +53,7 @@ app.use('/api', paymentRoutes);  // Asegúrate de que esta ruta no sobrescriba o
 app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
+app.use('/planEmail', planEmail);
 app.use('/usuarios', obtenerTodosLosUsuarios);
 app.use('/activarUsuario', activarUsuario);
 app.use('/desactivarUsuario', desactivarUsuario);
