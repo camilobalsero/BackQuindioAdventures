@@ -93,6 +93,13 @@ class planRepository{
         }
     }
 
+    static async eliminarPlan(id:number){
+        const sql = 'CALL eliminarPlanVacacional(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
+
 }
 
 export default planRepository;

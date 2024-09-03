@@ -4,6 +4,7 @@ import chaletRepository from '../repositories/chaletRepository';
 import PlanImages from '../Dto/PlanImagenesDto';
 import planRepository from '../repositories/planRepository';
 
+
 class planService{
     static async addPlan(plan: Plan) {
         return await planRepository.addPlan(plan);
@@ -48,6 +49,10 @@ class planService{
             console.error("Error en planService al obtener plan por ID:", error);
             throw error;
         }
+    }
+
+    static async eliminarPlan(id: number) {
+        return await planRepository.eliminarPlan(id);
     }
 }
 
