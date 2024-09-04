@@ -26,8 +26,10 @@ import activarUsuario from './routes/activarUsuario';
 import desactivarUsuario from './routes/desactivarUsuario';
 import activarChalet from './routes/activarChalet';
 import eliminarChalet from './routes/eliminarChalet';
+import activarPlan from './routes/activarPlan'
 import eliminarPlan from './routes/eliminarPlanVacacional';
 import chaletsAdmin from './routes/chaletsAdmin'
+import planesAdmin from './routes/planesAdmin'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -58,11 +60,13 @@ app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
 app.use('/planEmail', planEmail);
+app.use('/planesAdmin', planesAdmin);
 app.use('/usuarios', obtenerTodosLosUsuarios);
 app.use('/activarUsuario', activarUsuario);
 app.use('/desactivarUsuario', desactivarUsuario);
 app.use('/activarChalet', activarChalet);
 app.use('/eliminarChalet', eliminarChalet);
+app.use('/activarPlan', activarPlan);
 app.use('/eliminarPlan', eliminarPlan);
 
 const PORT = process.env.PORT || 10101;

@@ -37,6 +37,16 @@ class planService{
         }
     }
 
+    static async getAllPlanesAdmin(): Promise<any[]> {
+        try {
+            const chalets = await planRepository.getAllPlanesAdmin();
+            return chalets;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalets:", error);
+            throw error;
+        }
+    }
+
     static async eliminarPlan(id: number) {
         return await planRepository.eliminarPlan(id);
     }
@@ -49,6 +59,10 @@ class planService{
             console.error("Error en chaletService al obtener chalet por ID:", error);
             throw error;
         }
+    }
+
+    static async activarPlan(id: number) {
+        return await planRepository.activarPlan(id);
     }
 }
 
