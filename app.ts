@@ -24,8 +24,10 @@ import obtenerPlanPorId from './routes/getPlanId';
 import obtenerTodosLosUsuarios from './routes/getUsuarios';
 import activarUsuario from './routes/activarUsuario';
 import desactivarUsuario from './routes/desactivarUsuario';
+import activarChalet from './routes/activarChalet';
 import eliminarChalet from './routes/eliminarChalet';
 import eliminarPlan from './routes/eliminarPlanVacacional';
+import chaletsAdmin from './routes/chaletsAdmin'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -45,7 +47,8 @@ app.use('/api/images', imageRoutes);
 app.use('/createChalet', createChalet);
 app.use('/chalet', obtenerChalets);
 app.use('/chaletId', obtenerChaletsId );
-app.use('/chaletEmail', chaletEmail)
+app.use('/chaletEmail', chaletEmail);
+app.use('/chaletsAdmin', chaletsAdmin);
 app.use('/api', obtenerChaletsId);
 app.use('/reserva', reserva);
 app.use('/temporadas', obtenerTemporada);
@@ -58,8 +61,9 @@ app.use('/planEmail', planEmail);
 app.use('/usuarios', obtenerTodosLosUsuarios);
 app.use('/activarUsuario', activarUsuario);
 app.use('/desactivarUsuario', desactivarUsuario);
-app.use('/eliminarChalet', eliminarChalet)
-app.use('/eliminarPlan', eliminarPlan)
+app.use('/activarChalet', activarChalet);
+app.use('/eliminarChalet', eliminarChalet);
+app.use('/eliminarPlan', eliminarPlan);
 
 const PORT = process.env.PORT || 10101;
 

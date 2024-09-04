@@ -43,6 +43,16 @@ class chaletService{
         }
     }
 
+    static async getAllChaletsAdmin(): Promise<any[]> {
+        try {
+            const chalets = await chaletRepository.getAllChaletsAdmin();
+            return chalets;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalets:", error);
+            throw error;
+        }
+    }
+
     static async getChaletById(chaletId: number) {
         try {
             const chalet = await chaletRepository.getChaletById(chaletId);
@@ -65,6 +75,10 @@ class chaletService{
 
     static async eliminarChalet(id: number) {
         return await chaletRepository.eliminarChalet(id);
+    }
+
+    static async activarChalet(id: number) {
+        return await chaletRepository.activarChalet(id);
     }
 }
 
