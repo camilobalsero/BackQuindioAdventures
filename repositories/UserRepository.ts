@@ -40,6 +40,7 @@ class UserRepository {
             if (passwordRows.length > 0) {
                 return passwordRows[0].password;
             } else {
+                return {logged: false, status: 'No se encontro un usuario con el email proporcionado'}
                 throw new Error('No se encontró el usuario con el email proporcionado.');
             }
         } catch (error) {
