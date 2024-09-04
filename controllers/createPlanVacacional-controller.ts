@@ -47,8 +47,16 @@ const crearPlan = async (req: Request, res: Response) => {
                 templateName: 'crearPlan.html',
               };
           
-              // Enviar el correo usando el servicio de Azure
               await sendEmail(emailData);
+
+              const emailAdmin = {
+                subject: 'Alguien ha creado un Plan Vacacionl',
+                to: 'quindioadventures@gmail.com',
+                dataTemplate: { nombre: nombre },  
+                templateName: 'crearPlanAdmin.html',
+              };
+              await sendEmail(emailAdmin);
+          
 
 
             return res.status(201).send({ status: 'Plan Vacacional registrado exitosamente' });
