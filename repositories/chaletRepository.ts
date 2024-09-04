@@ -115,6 +115,13 @@ class chaletRepository{
         }
     }
 
+    static async eliminarChalet(id:number){
+        const sql = 'CALL eliminarChalet(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
+
 }
 
 export default chaletRepository;
