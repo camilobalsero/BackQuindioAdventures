@@ -59,9 +59,18 @@ const crearChalet = async (req: Request, res: Response) => {
                 dataTemplate: { nombre: nombre },  
                 templateName: 'crearChalet.html',
               };
+              await sendEmail(emailData);
+
+              const emailAdmin = {
+                subject: 'Alguien ha creado un chalet',
+                to: 'quindioadventures@gmail.com',
+                dataTemplate: { nombre: nombre },  
+                templateName: 'crearChaletAdmin.html',
+              };
+              await sendEmail(emailAdmin);
           
               // Enviar el correo usando el servicio de Azure
-              await sendEmail(emailData);
+              
 
             return res.status(201).send({ status: 'Chalet registrado exitosamente' });
         } catch (error) {
