@@ -6,7 +6,7 @@ export let validatorParams = [
     check('lastName').isLength({ min: 1, max: 150 }).isString(),
     check('phoneNumber').isLength({ min: 10, max: 10 }).isString(),
     check('age').isNumeric(),
-    check('document').isLength({ min: 10, max: 10 }).isString(),
+    check('document').isLength({ min: 7, max: 11 }).isString(),
     check('address').isLength({ min: 1 }).isString(), // Ajustado el min length para no estar vacío
     check('email').isEmail(),
     check('password').isLength({ min: 8, max: 15 })

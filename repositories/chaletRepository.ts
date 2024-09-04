@@ -81,6 +81,17 @@ class chaletRepository{
     }
 
     static async getAllChalets(): Promise<any[]> {
+        const sql = `CALL obtenerTodosLosChaletsPorEstado()`;
+        try {
+            const [rows]: any = await db.execute(sql);
+            return rows[0]; // Retorna los chalets desde la primera fila del resultado
+        } catch (error) {
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
+            throw error;
+        }
+    }
+
+    static async getAllChaletsAdmin(): Promise<any[]> {
         const sql = `CALL obtenerTodosLosChalets()`;
         try {
             const [rows]: any = await db.execute(sql);
@@ -117,6 +128,13 @@ class chaletRepository{
 
     static async eliminarChalet(id:number){
         const sql = 'CALL eliminarChalet(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
+
+    static async activarChalet(id:number){
+        const sql = 'CALL activarChalet(?)';
         const values = [id]
 
         return db.execute(sql, values);
