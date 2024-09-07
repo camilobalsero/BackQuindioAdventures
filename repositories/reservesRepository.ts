@@ -21,8 +21,6 @@ class ReservesRepository {
             reserva.fechaFin,
             JSON.stringify(reserva.tarifa) // Convertir el JSON a cadena para almacenar en la base de datos
         ];
-        console.log(values);
-
         try {
             const [result]: any = await db.execute(sql, values);
             return result.insertId; // Asumiendo que se devuelve el ID de la reserva
@@ -98,6 +96,35 @@ class ReservesRepository {
             return result;
         } catch (error) {
             console.error("Error al llamar al procedimiento almacenado obtenerTarifasPorChaletYTemporada:", error);
+            throw error;
+        }
+    }
+
+    static async getReservasByEmail(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasPorEmail(?)';
+        const values = [emailUsuario];
+        
+        try {
+            // Ejecutar el procedimiento almacenado pasando el email como parámetro
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene la lista de reservas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerReservasPorEmail:", error);
+            throw error;
+        }
+    }
+
+    static async getReservasByEmailMine(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasPorEmailyId(?)';
+        const values = [emailUsuario];
+        try {
+            // Ejecutar el procedimiento almacenado pasando el email como parámetro
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene la lista de reservas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerReservasPorEmail:", error);
             throw error;
         }
     }

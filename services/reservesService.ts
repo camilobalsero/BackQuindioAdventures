@@ -22,6 +22,14 @@ class ReservesService {
     public async getTarifasByPlanAndTemporada(idPlan: number, temporada: string): Promise<any[]> {
         return await ReservesRepository.getTarifasByPlanAndTemporada(idPlan, temporada);
     }
+
+    public async getReservasByEmail(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasByEmail(emailUsuario);
+    }
+
+    public async getReservasByEmailMine(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasByEmailMine(emailUsuario);
+    }
 }
 
 export default new ReservesService();

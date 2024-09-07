@@ -11,6 +11,7 @@ class Reserva {
     private _estancia: number; // Cambiado a string si se almacena como TEXT
     private _fechaInicio: Date;
     private _fechaFin: Date;
+    private _fechaRegistro: Date;
     private _tarifa: any; // JSON
 
     constructor(
@@ -26,6 +27,7 @@ class Reserva {
         estancia: number,
         fechaInicio: Date,
         fechaFin: Date,
+        fechaRegistro: Date,
         tarifa: any
     ) {
         this._email = email;
@@ -40,6 +42,7 @@ class Reserva {
         this._estancia = estancia;
         this._fechaInicio = fechaInicio;
         this._fechaFin = fechaFin;
+        this._fechaRegistro = fechaRegistro;
         this._tarifa = tarifa;
     }
 
@@ -56,6 +59,7 @@ class Reserva {
     get estancia(): number { return this._estancia; }
     get fechaInicio(): Date { return this._fechaInicio; }
     get fechaFin(): Date { return this._fechaFin; }
+    get fechaRegistro(): Date { return this._fechaRegistro; }
     get tarifa(): any { return this._tarifa; }
 
     // Setters
@@ -71,6 +75,7 @@ class Reserva {
     set estancia(value: number) { this._estancia = value; }
     set fechaInicio(value: Date) { this._fechaInicio = value; }
     set fechaFin(value: Date) { this._fechaFin = value; }
+    set fechaRegistro(value: Date) { this._fechaRegistro = value; }
     set tarifa(value: any) { this._tarifa = value; }
 }
 
