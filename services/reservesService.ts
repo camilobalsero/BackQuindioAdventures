@@ -23,12 +23,20 @@ class ReservesService {
         return await ReservesRepository.getTarifasByPlanAndTemporada(idPlan, temporada);
     }
 
-    public async getReservasByEmail(emailUsuario: string): Promise<any[]> {
-        return await ReservesRepository.getReservasByEmail(emailUsuario);
+    public async getReservasChaletByEmail(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasChaletByEmail(emailUsuario);
     }
 
-    public async getReservasByEmailMine(emailUsuario: string): Promise<any[]> {
-        return await ReservesRepository.getReservasByEmailMine(emailUsuario);
+    public async getReservasPlanByEmail(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasPlanByEmail(emailUsuario);
+    }
+
+    public async getReservasChaletByEmailMine(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasChaletByEmailMine(emailUsuario);
+    }
+
+    public async getReservasPlanByEmailMine(emailUsuario: string): Promise<any[]> {
+        return await ReservesRepository.getReservasPlanByEmailMine(emailUsuario);
     }
 }
 

@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN || 'TEST-4765974219572950-082800-55653a3af2fe5b30c0deabd4ac17d8de-1605181587';
+const accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN || 'TEST-7838772050870195-090722-9816ca192ffc1bc2ce93b4be14b24923-1982723570';
 
 const apiBaseUrl = 'https://api.mercadopago.com';
 
@@ -20,6 +20,7 @@ export const createOrder = async (preference: any): Promise<any> => {
         },
       }
     );
+
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error);

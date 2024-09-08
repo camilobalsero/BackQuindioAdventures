@@ -5,7 +5,7 @@ import ReservaPlan from '../Dto/reservesPlanDto';
 
 class ReservesRepository {
     static async addReserva(reserva: Reserva): Promise<number> {
-        const sql = 'CALL RegistrarReservaChalet(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'CALL RegistrarReservaChalet(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [
             reserva.email,
             reserva.idChalet,
@@ -19,6 +19,7 @@ class ReservesRepository {
             reserva.estancia,
             reserva.fechaInicio,
             reserva.fechaFin,
+            reserva.fechaRegistro,
             JSON.stringify(reserva.tarifa) // Convertir el JSON a cadena para almacenar en la base de datos
         ];
         try {
@@ -45,7 +46,6 @@ class ReservesRepository {
             reserva.fechaReserva,
             JSON.stringify(reserva.tarifa) // Convertir el JSON a cadena para almacenar en la base de datos
         ];
-        console.log(values);
 
         try {
             const [result]: any = await db.execute(sql, values);
@@ -100,8 +100,8 @@ class ReservesRepository {
         }
     }
 
-    static async getReservasByEmail(emailUsuario: string): Promise<any[]> {
-        const sql = 'CALL obtenerReservasPorEmail(?)';
+    static async getReservasChaletByEmail(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasChaletPorEmail(?)';
         const values = [emailUsuario];
         
         try {
@@ -115,8 +115,37 @@ class ReservesRepository {
         }
     }
 
-    static async getReservasByEmailMine(emailUsuario: string): Promise<any[]> {
-        const sql = 'CALL obtenerReservasPorEmailyId(?)';
+    static async getReservasPlanByEmail(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasPlanPorEmail(?)';
+        const values = [emailUsuario];
+        
+        try {
+            // Ejecutar el procedimiento almacenado pasando el email como parámetro
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene la lista de reservas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerReservasPorEmail:", error);
+            throw error;
+        }
+    }
+
+    static async getReservasChaletByEmailMine(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasChaletPorEmailyId(?)';
+        const values = [emailUsuario];
+        try {
+            // Ejecutar el procedimiento almacenado pasando el email como parámetro
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene la lista de reservas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerReservasPorEmail:", error);
+            throw error;
+        }
+    }
+
+    static async getReservasPlanByEmailMine(emailUsuario: string): Promise<any[]> {
+        const sql = 'CALL obtenerReservasPlanVacacionalPorEmailyId(?)';
         const values = [emailUsuario];
         try {
             // Ejecutar el procedimiento almacenado pasando el email como parámetro

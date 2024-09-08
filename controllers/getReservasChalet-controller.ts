@@ -9,7 +9,7 @@ const obtenerReservasChalet = async (req: Request, res: Response) => {
     }
 
     try {
-        const reservas = await reservesService.getReservasByEmail(email);
+        const reservas = await reservesService.getReservasChaletByEmail(email);
         return res.status(200).json(reservas);
     } catch (error) {
         console.error("Error al obtener reservas:", error);

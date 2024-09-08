@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import reservesService from '../services/reservesService';
 
-const obtenerReservasMiChalet = async (req: Request, res: Response) => {
+const obtenerReservasMiPlan = async (req: Request, res: Response) => {
     const email = res.locals.user?.email; // Extraer el email del token
 
     if (!email) {
@@ -9,7 +9,7 @@ const obtenerReservasMiChalet = async (req: Request, res: Response) => {
     }
 
     try {
-        const reservas = await reservesService.getReservasChaletByEmailMine(email);
+        const reservas = await reservesService.getReservasPlanByEmailMine(email);
         return res.status(200).json(reservas);
     } catch (error) {
         console.error("Error al obtener reservas:", error);
@@ -17,4 +17,4 @@ const obtenerReservasMiChalet = async (req: Request, res: Response) => {
     }
 };
 
-export default obtenerReservasMiChalet;
+export default obtenerReservasMiPlan;

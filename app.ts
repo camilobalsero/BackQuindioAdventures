@@ -34,6 +34,8 @@ import chaletsAdmin from './routes/chaletsAdmin'
 import planesAdmin from './routes/planesAdmin'
 import getReservasChalet from './routes/getReservasChalet'
 import getReservasMiChalet from './routes/getReservasMiChalet'
+import getReservasPlan from './routes/getReservasPlan'
+import getReservasMiPlan from './routes/getReservasMiPlan'
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -75,7 +77,9 @@ app.use('/eliminarPlan', eliminarPlan);
 app.use('/reserva', reserva);
 app.use('/reservaPlan', reservaPlan);
 app.use('/getReservasChalet', getReservasChalet);
-app.use('/getRerservasMiChalet', getReservasMiChalet)
+app.use('/getRerservasMiChalet', getReservasMiChalet);
+app.use('/getReservasPlan', getReservasPlan);
+app.use('/getRerservasMiPlan', getReservasMiPlan);
 
 const PORT = process.env.PORT || 10101;
 

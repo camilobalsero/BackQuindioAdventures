@@ -24,8 +24,8 @@ const crearReservaPlan = async (req: Request, res: Response) => {
 
         // Convertir las fechas a objetos Date
         const fecha = new Date(fecha_inicio).toISOString().split('T')[0];
+        const fechaRegistro = new Date().toISOString().split('T')[0];
 
-        // Calcular el total de días entre las fechas
 
         // Crear el objeto Reserva con los datos recibidos
         const reserva = new Reserva(
@@ -39,6 +39,7 @@ const crearReservaPlan = async (req: Request, res: Response) => {
             direccion,
             precioTotal, // Convertir precio a número
             fecha, // Fecha de inicio
+            fechaRegistro,
             tarifaSeleccionada, // Tarifa seleccionada
         );
 
