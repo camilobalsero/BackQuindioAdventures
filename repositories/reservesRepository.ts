@@ -1,4 +1,3 @@
-import { log } from 'console';
 import db from '../config/config-db';
 import Reserva from '../Dto/reservesDto';
 import ReservaPlan from '../Dto/reservesPlanDto';
@@ -32,7 +31,7 @@ class ReservesRepository {
     }
 
     static async addReservaPlan(reserva: ReservaPlan): Promise<number> {
-        const sql = 'CALL RegistrarReservaPlan(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'CALL RegistrarReservaPlan(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
         const values = [
             reserva.email,
             reserva.idPlan,
@@ -44,6 +43,7 @@ class ReservesRepository {
             reserva.direccion,
             reserva.precioFinal,
             reserva.fechaReserva,
+            reserva.fechaRegistro,
             JSON.stringify(reserva.tarifa) // Convertir el JSON a cadena para almacenar en la base de datos
         ];
 
@@ -116,7 +116,7 @@ class ReservesRepository {
     }
 
     static async getReservasPlanByEmail(emailUsuario: string): Promise<any[]> {
-        const sql = 'CALL obtenerReservasPlanPorEmail(?)';
+        const sql = 'CALL obtenerReservasPlanVacacionalPorEmail(?)';
         const values = [emailUsuario];
         
         try {
@@ -154,6 +154,58 @@ class ReservesRepository {
             return result;
         } catch (error) {
             console.error("Error al llamar al procedimiento almacenado obtenerReservasPorEmail:", error);
+            throw error;
+        }
+    }
+
+    static async cancelarReserva(idReserva:string): Promise<any[]> {
+        const sql = 'CALL deshabilitarReserva(?)';
+        const values = [idReserva];
+        try {
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene una lista de tarifas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerTarifasPorChaletYTemporada:", error);
+            throw error;
+        }
+    }
+
+    static async cancelarReservaPlan(idReserva:string): Promise<any[]> {
+        const sql = 'CALL deshabilitarReservaPlan(?)';
+        const values = [idReserva];
+        try {
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene una lista de tarifas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerTarifasPorChaletYTemporada:", error);
+            throw error;
+        }
+    }
+
+    static async activarReserva(idReserva:string): Promise<any[]> {
+        const sql = 'CALL habilitarReserva(?)';
+        const values = [idReserva];
+        try {
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene una lista de tarifas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerTarifasPorChaletYTemporada:", error);
+            throw error;
+        }
+    }
+
+    static async activarReservaPlan(idReserva:string): Promise<any[]> {
+        const sql = 'CALL habilitarReservaPlan(?)';
+        const values = [idReserva];
+        try {
+            const [result]: any = await db.execute(sql, values);
+            // Asumir que result contiene una lista de tarifas
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado obtenerTarifasPorChaletYTemporada:", error);
             throw error;
         }
     }

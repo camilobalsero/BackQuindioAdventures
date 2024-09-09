@@ -14,7 +14,6 @@ class planRepository{
             plan.email,
             plan.fechaRegistro
         ];
-        
 
         try {
             // Ejecutar el procedimiento almacenado

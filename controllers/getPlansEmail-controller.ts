@@ -10,7 +10,7 @@ const obtenerPlanesPorEmail = async (req: Request, res: Response) =>{
 
 
         const planes = await planService.getPlanesByEmail(email);
-        console.log(planes);
+        console.log(planes,2345);
 
         if(!planes){
             return res.status(404).json({error: "Planes no encontrados"});

@@ -38,6 +38,22 @@ class ReservesService {
     public async getReservasPlanByEmailMine(emailUsuario: string): Promise<any[]> {
         return await ReservesRepository.getReservasPlanByEmailMine(emailUsuario);
     }
+
+    public async cancelarReserva(idReserva : string): Promise<any[]> {
+        return await ReservesRepository.cancelarReserva(idReserva);
+    }
+
+    public async cancelarReservaPlan(idReserva : string): Promise<any[]> {
+        return await ReservesRepository.cancelarReservaPlan(idReserva);
+    }
+
+    public async activarReserva(idReserva : string): Promise<any[]> {
+        return await ReservesRepository.activarReserva(idReserva);
+    }
+
+    public async activarReservaPlan(idReserva : string): Promise<any[]> {
+        return await ReservesRepository.activarReservaPlan(idReserva);
+    }
 }
 
 export default new ReservesService();

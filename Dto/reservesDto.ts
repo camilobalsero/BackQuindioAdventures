@@ -9,9 +9,9 @@ class Reserva {
     private _direccion: string;
     private _precioFinal: number;
     private _estancia: number; // Cambiado a string si se almacena como TEXT
-    private _fechaInicio: Date;
-    private _fechaFin: Date;
-    private _fechaRegistro: Date;
+    private _fechaInicio: string;
+    private _fechaFin: string;
+    private _fechaRegistro: string;
     private _tarifa: any; // JSON
 
     constructor(
@@ -25,9 +25,9 @@ class Reserva {
         direccion: string,
         precioFinal: number,
         estancia: number,
-        fechaInicio: Date,
-        fechaFin: Date,
-        fechaRegistro: Date,
+        fechaInicio: string,
+        fechaFin: string,
+        fechaRegistro: string,
         tarifa: any
     ) {
         this._email = email;
@@ -57,9 +57,9 @@ class Reserva {
     get direccion(): string { return this._direccion; }
     get precioFinal(): number { return this._precioFinal; }
     get estancia(): number { return this._estancia; }
-    get fechaInicio(): Date { return this._fechaInicio; }
-    get fechaFin(): Date { return this._fechaFin; }
-    get fechaRegistro(): Date { return this._fechaRegistro; }
+    get fechaInicio(): string { return this._fechaInicio; }
+    get fechaFin(): string { return this._fechaFin; }
+    get fechaRegistro(): string { return this._fechaRegistro; }
     get tarifa(): any { return this._tarifa; }
 
     // Setters
@@ -73,9 +73,9 @@ class Reserva {
     set direccion(value: string) { this._direccion = value; }
     set precioFinal(value: number) { this._precioFinal = value; }
     set estancia(value: number) { this._estancia = value; }
-    set fechaInicio(value: Date) { this._fechaInicio = value; }
-    set fechaFin(value: Date) { this._fechaFin = value; }
-    set fechaRegistro(value: Date) { this._fechaRegistro = value; }
+    set fechaInicio(value: string) { this._fechaInicio = value; }
+    set fechaFin(value: string) { this._fechaFin = value; }
+    set fechaRegistro(value: string) { this._fechaRegistro = value; }
     set tarifa(value: any) { this._tarifa = value; }
 }
 

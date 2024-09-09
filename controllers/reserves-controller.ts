@@ -23,11 +23,15 @@ const crearReserva = async (req: Request, res: Response) => {
         // Convertir las fechas a objetos Date
         const fechaInicio = new Date(checkin);
         const fechaFin = new Date(checkout);
-        const fechaRegistro = new Date();
+        const fechaRegistro = new Date().toISOString().split('T')[0];
 
         // Calcular el total de días entre las fechas
         const timeDiff = fechaFin.getTime() - fechaInicio.getTime();
         const totalDias = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+
+
+        const finalFechaInicio = new Date(checkin).toISOString().split('T')[0];
+        const finalFechaFin = new Date(checkout).toISOString().split('T')[0];
 
         // Crear el objeto Reserva con los datos recibidos
         const reserva = new Reserva(
@@ -41,8 +45,8 @@ const crearReserva = async (req: Request, res: Response) => {
             direccion,
             precioTotal, // Convertir precio a número
             totalDias, // Estancia (opcional si deseas unir check-in y check-out)
-            fechaInicio, // Fecha de inicio
-            fechaFin, // Fecha de fin
+            finalFechaInicio, // Fecha de inicio
+            finalFechaFin, // Fecha de fin
             fechaRegistro,
             tarifaSeleccionada, // Tarifa seleccionada
         );
