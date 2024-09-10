@@ -152,6 +152,22 @@ class chaletRepository{
         }
     }
 
+    static async getOpinionChalet(chaletId: number) {
+        const sql = 'CALL obtenerOpinionesChalet(?)';
+        const values = [chaletId];
+        
+        try {
+            // Ejecutar el procedimiento almacenado
+            const [rows] : any= await db.execute(sql, values); 
+            
+            return rows[0];
+
+        } catch (error) {
+            console.error('Error al obtener las opiniones del chalet:', error);
+            throw error;
+        }
+    }
+
 }
 
 export default chaletRepository;

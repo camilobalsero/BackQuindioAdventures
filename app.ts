@@ -43,6 +43,7 @@ import cancelarReservaPlan from './routes/cancelarReservaPlan';
 import activarReservaPlan from './routes/activarReservaPlan';
 import crearOpinionChalet from './routes/crearOpinionChalet';
 import crearOpinionPlan from './routes/crearOpinionPlan';
+import getOpinionChalet from './routes/getOpinionChalet';
 
 const app = express();
 
@@ -94,6 +95,7 @@ app.use('/cancelarReservaPlan', cancelarReservaPlan);
 app.use('/activarReservaPlan', activarReservaPlan);
 app.use('/crearOpinionChalet', crearOpinionChalet);
 app.use('/crearOpinionPlan', crearOpinionPlan);
+app.use('/getOpinionChalet/', getOpinionChalet);
 
 const PORT = process.env.PORT || 10101;
 
