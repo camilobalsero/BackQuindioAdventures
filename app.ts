@@ -42,14 +42,15 @@ import activarReserva from './routes/activarReserva';
 import cancelarReservaPlan from './routes/cancelarReservaPlan';
 import activarReservaPlan from './routes/activarReservaPlan';
 import crearOpinionChalet from './routes/crearOpinionChalet';
+import crearOpinionPlan from './routes/crearOpinionPlan';
 
 const app = express();
-// Middleware para parsear JSON y formularios
+
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// Registro de rutas
+
 app.use('/register', register);
 app.use('/auth', auth);
 app.use('/authAdmin', authAdmin);
@@ -65,9 +66,9 @@ app.use('/chaletEmail', chaletEmail);
 app.use('/chaletsAdmin', chaletsAdmin);
 app.use('/api', obtenerChaletsId);
 app.use('/temporadas', obtenerTemporada);
-app.use('/temporadasPlan', obtenerTemporadaPlan)
+app.use('/temporadasPlan', obtenerTemporadaPlan);
 app.use('/chatbot', chatbot);
-app.use('/api', paymentRoutes);  // Asegúrate de que esta ruta no sobrescriba otras
+app.use('/api', paymentRoutes);
 app.use('/createPlan', createPlan);
 app.use('/plan', obtenerPlanes);
 app.use('/planId', obtenerPlanPorId);
@@ -92,6 +93,7 @@ app.use('/activarReserva', activarReserva);
 app.use('/cancelarReservaPlan', cancelarReservaPlan);
 app.use('/activarReservaPlan', activarReservaPlan);
 app.use('/crearOpinionChalet', crearOpinionChalet);
+app.use('/crearOpinionPlan', crearOpinionPlan);
 
 const PORT = process.env.PORT || 10101;
 

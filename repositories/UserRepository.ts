@@ -1,6 +1,7 @@
 import db from '../config/config-db';
 import Auth from '../Dto/AuthDto';
-import Opinion from '../Dto/OpinionChaletDto';
+import OpinionChalet from '../Dto/OpinionChaletDto';
+import OpinionPlan from '../Dto/OpinionPlanDto'
 import UpdateUser from '../Dto/UpdateUserDto';
 import User from '../Dto/UserDto';
 import UserRegister from '../Dto/UserRegisterDto';
@@ -104,7 +105,7 @@ class UserRepository {
         }
     }
 
-    static async createOpinion(opinion: Opinion) {
+    static async createOpinionChalet(opinion: OpinionChalet) {
         const sql = 'CALL crearOpinionChalet(?, ?, ?, ?, ?, ?)';
         const values = [
             opinion.email,
@@ -114,8 +115,26 @@ class UserRepository {
             opinion.hora,
             opinion.calificacion
         ];
+        
+        try {
+            const [result]: any = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado crearOpinion:", error);
+            throw error;
+        }
+    }
 
-        console.log(values,2345);
+    static async createOpinionPlan(opinion: OpinionPlan) {
+        const sql = 'CALL crearOpinionPlan(?, ?, ?, ?, ?, ?)';
+        const values = [
+            opinion.email,
+            opinion.idPlan,
+            opinion.opinion,
+            opinion.fechaCreacion,
+            opinion.hora,
+            opinion.calificacion
+        ];
         
         try {
             const [result]: any = await db.execute(sql, values);

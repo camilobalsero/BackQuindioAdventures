@@ -1,20 +1,20 @@
-class Opinion {
+class OpinionPlan {
     _email: string;
-    _idPlan: number;
+    _id_plan: number;
     _opinion: string;
     _fechaCreacion: string;
     _hora: string;
     _calificacion: number;
     constructor(
         email: string,
-        idPlan: number,
+        id_plan: number,
         opinion: string,
         fechaCreacion: string,
         hora:string,
         calificacion: number
     ) {
         this._email = email;
-        this._idPlan = idPlan;
+        this._id_plan = id_plan;
         this._opinion = opinion;
         this._fechaCreacion = fechaCreacion;
         this._hora = hora;
@@ -26,8 +26,8 @@ class Opinion {
     set email(value: string) { this._email = value; }
 
 
-    get idPlan(): number { return this._idPlan; }
-    set idPlan(value: number) { this._idPlan = value; }
+    get idPlan(): number { return this._id_plan; }
+    set idPlan(value: number) { this._id_plan = value; }
 
     
     get opinion(): string { return this._opinion; }
@@ -45,4 +45,4 @@ class Opinion {
     set calificacion(value: number) { this._calificacion = value; }
 }
 
-export default Opinion;
+export default OpinionPlan;
