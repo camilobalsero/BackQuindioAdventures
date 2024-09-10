@@ -13,8 +13,8 @@ const router = express.Router();
 
 // Define a set of keywords or phrases related to your page
 const relevantKeywords = [
-  "chalets", "reservas", "planes vacacionales", "QuindioAdventures", 
-  "servicios", "empresa", "misión", "visión", "descripción general"
+  "chalets", "reservas","hola", "planes vacacionales", "QuindioAdventures", 
+  "servicios","misión", "visión", "mision","vision","descripcion general","descripción general","como reservar un plan vacacional","como reservar un chalet","que me puede ofrecer la pagina","quindioadventures","que puedo hacer en la pagina"
 ];
 
 // Function to check if the question is relevant
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
   const history = [
     {
       "role": "user",
-      "parts": "Esta es una conversación sobre chalets disponibles en QuindioAdventures."
+      "parts": "Esta es una conversación sobre chalets y planes vacacionales disponibles en QuindioAdventures."
     }
   ]
 

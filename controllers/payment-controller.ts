@@ -1,36 +1,64 @@
 import axios from 'axios';
+import { Request, Response } from 'express';
 
-export const createOrder = async () => {
-  try {
-    const response = await axios.post('https://api.mercadopago.com/checkout/preferences', {
-      items: [
-        {
-          title: 'Laptop',
-          unit_price: 10000,
-          currency_id: 'CO',
-          quantity: 1
-        }
-      ],
-      back_urls: {
-        success: 'http://localhost:10101/success',
-        failure: 'http://localhost:10101/failure',
-        pending: 'http://localhost:10101/pending'
-      }
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer TEST-4765974219572950-082800-55653a3af2fe5b30c0deabd4ac17d8de-1605181587'
-      }
+export const createOrder = async (req: Request, res: Response) => {
+  const { precioTotal, tipoReserva } = req.body;
+
+  // Verifica qué valor está llegando
+  console.log('Valor de precioTotal recibido:', precioTotal);
+
+  if (!precioTotal || isNaN(precioTotal) || precioTotal <= 0) {
+    return res.status(400).json({
+      error: 'El precio total debe ser un número válido mayor a 0',
     });
+  }
+
+  try {
+    const response = await axios.post(
+      'https://api.mercadopago.com/checkout/preferences',
+      {
+        items: [
+          {
+            title: tipoReserva === 'chalet' ? 'Reserva de Chalet' : 'Reserva de Plan',
+            unit_price: parseFloat(precioTotal), // Asegurarse de que sea un número
+            currency_id: 'COP',
+            quantity: 1,
+          },
+        ],
+        back_urls: {
+          success: 'http://localhost:10101/success',
+          failure: 'http://localhost:10101/failure',
+          pending: 'http://localhost:10101/pending',
+        },
+      },
+      {
+        headers: {
+          'Authorization': 'Bearer TEST-7838772050870195-090722-9816ca192ffc1bc2ce93b4be14b24923-1982723570',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     console.log('Order created successfully:', response.data);
+    return res.status(200).json(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error('Error creating order:', error.response?.data || error.message);
+      // Log detallado del error
+      console.error('Error details:', {
+        status: error.response?.status, // Código de estado de la respuesta
+        statusText: error.response?.statusText, // Texto del estado
+        data: error.response?.data, // Datos del error
+        headers: error.response?.headers, // Headers de la respuesta
+        request: error.request, // Detalles de la solicitud enviada
+      });
+
+      return res.status(500).json({
+        error: error.response?.data || error.message,
+        status: error.response?.status, // Incluye el código de estado en la respuesta
+      });
     } else {
       console.error('Unexpected error:', error);
+      return res.status(500).json({ error: 'Unexpected error' });
     }
   }
 };
-
-createOrder();

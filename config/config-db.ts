@@ -17,7 +17,7 @@ export default db.promise()
 const API_KEY_GEMINI = process.env.KEY_GEMINI;
 const GENERATION_CONFIG = {
   stopSequences: ["red"],
-  maxOutputTokens: 200,
+  maxOutputTokens: 100,
   temperature: 0.9,
   topP: 0.1,
   topK: 16,
@@ -25,7 +25,7 @@ const GENERATION_CONFIG = {
 const START_CHAT = [
     {
         role: "user",
-        parts: `Nombre de la Empresa: QuindioAdventures
+        parts: `Nombre: QuindioAdventures
   
         Misión: QuindioAdventures, nos dedicamos a tener los mejores servicios de chalets y planes vacacionales para que nuestros usuarios puedan tener una gran experiencia en la pagina.
         
@@ -44,7 +44,7 @@ const START_CHAT = [
       },
       {
         role: "model",
-        parts: "Genial empresa!",
+        parts: "Genial QuindioAdventures",
       }
 ]
 

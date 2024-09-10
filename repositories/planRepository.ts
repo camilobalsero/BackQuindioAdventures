@@ -14,7 +14,6 @@ class planRepository{
             plan.email,
             plan.fechaRegistro
         ];
-        
 
         try {
             // Ejecutar el procedimiento almacenado
@@ -71,7 +70,7 @@ class planRepository{
     }
 
     static async getAllPlans(): Promise<any[]> {
-        const sql = `CALL obtenerTodosLosPlanes()`;
+        const sql = `CALL obtenerTodosLosPlanesPorEstado()`;
         try {
             const [rows]: any = await db.execute(sql);
             return rows[0]; // Retorna los chalets desde la primera fila del resultado
@@ -111,6 +110,24 @@ class planRepository{
             console.error("Error en obtenerPlanesPorEmail:", error);
             throw error;
         }
+    }
+
+    static async getAllPlanesAdmin(): Promise<any[]> {
+        const sql = `CALL obtenerTodosLosPlanes()`;
+        try {
+            const [rows]: any = await db.execute(sql);
+            return rows[0]; // Retorna los chalets desde la primera fila del resultado
+        } catch (error) {
+            console.error("Error en la ejecución del procedimiento almacenado:", error);
+            throw error;
+        }
+    }
+
+    static async activarPlan(id:number){
+        const sql = 'CALL activarPlan(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
     }
 }
 

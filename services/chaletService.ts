@@ -80,6 +80,16 @@ class chaletService{
     static async activarChalet(id: number) {
         return await chaletRepository.activarChalet(id);
     }
+
+    static async getPerfilCreadorChalet(chaletId: number) {
+        try {
+            const chalet = await chaletRepository.getPerfilCreadorChalet(chaletId);
+            return chalet;
+        } catch (error) {
+            console.error("Error en chaletService al obtener chalet por ID:", error);
+            throw error;
+        }
+    }
 }
 
 export default chaletService;

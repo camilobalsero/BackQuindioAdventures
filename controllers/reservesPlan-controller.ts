@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import ReservesService from '../services/reservesService';
-import Reserva from '../Dto/reservesDto';
+import Reserva from '../Dto/reservesPlanDto';
 
-const crearReserva = async (req: Request, res: Response) => {
+const crearReservaPlan = async (req: Request, res: Response) => {
     try {
         const {
             documento,
@@ -11,32 +11,26 @@ const crearReserva = async (req: Request, res: Response) => {
             apellido,
             telefono,
             direccion,
-            checkin,
-            checkout,
+            fecha_inicio,
             precioTotal,
             tarifaSeleccionada
         } = req.body;
+
+        console.log(req.body,2345345678765);
+        
 
         // Obtener el email del usuario desde el token
         const email = res.locals.user.email;
 
         // Convertir las fechas a objetos Date
-        const fechaInicio = new Date(checkin);
-        const fechaFin = new Date(checkout);
+        const fecha = new Date(fecha_inicio).toISOString().split('T')[0];
         const fechaRegistro = new Date().toISOString().split('T')[0];
 
-        // Calcular el total de días entre las fechas
-        const timeDiff = fechaFin.getTime() - fechaInicio.getTime();
-        const totalDias = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
-
-
-        const finalFechaInicio = new Date(checkin).toISOString().split('T')[0];
-        const finalFechaFin = new Date(checkout).toISOString().split('T')[0];
 
         // Crear el objeto Reserva con los datos recibidos
         const reserva = new Reserva(
             email, // Email obtenido del token
-            tarifaSeleccionada.id_chalet_usuario, // ID del chalet
+            tarifaSeleccionada.id_planV_usuario, // ID del chalet
             documento,
             cantidadPersonas,
             nombre,
@@ -44,14 +38,15 @@ const crearReserva = async (req: Request, res: Response) => {
             telefono,
             direccion,
             precioTotal, // Convertir precio a número
-            totalDias, // Estancia (opcional si deseas unir check-in y check-out)
-            finalFechaInicio, // Fecha de inicio
-            finalFechaFin, // Fecha de fin
+            fecha, // Fecha de inicio
             fechaRegistro,
             tarifaSeleccionada, // Tarifa seleccionada
         );
+
+        console.log(reserva,234567);
+        
         // Insertar la reserva usando el servicio
-        const reservaId = await ReservesService.createReserva(reserva);
+        const reservaId = await ReservesService.createReservaPlan(reserva);
 
         return res.status(201).json({ status: 'Reserva creada exitosamente', reservaId });
     } catch (error) {
@@ -60,4 +55,4 @@ const crearReserva = async (req: Request, res: Response) => {
     }
 }
 
-export default crearReserva;
+export default crearReservaPlan;

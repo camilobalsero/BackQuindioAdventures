@@ -26,7 +26,7 @@ const crearPlan = async (req: Request, res: Response) => {
 
         try {
             const planId = await PlanService.addPlan(plan);
-
+            
             for (const tarifa of tarifas) {
                 let newTarifa: PlanTarifa = new PlanTarifa(planId, tarifa.precio, tarifa.temporada, tarifa.horaSalida, tarifa.horaLlegada);
                 console.log(newTarifa,12345);
