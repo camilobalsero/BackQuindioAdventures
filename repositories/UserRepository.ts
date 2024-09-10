@@ -1,5 +1,6 @@
 import db from '../config/config-db';
 import Auth from '../Dto/AuthDto';
+import Opinion from '../Dto/OpinionChaletDto';
 import UpdateUser from '../Dto/UpdateUserDto';
 import User from '../Dto/UserDto';
 import UserRegister from '../Dto/UserRegisterDto';
@@ -99,6 +100,28 @@ class UserRepository {
             return rows[0];
         } catch(error){
             console.error("Error en la ejecución del procedimiento almacenado:", error);
+            throw error;
+        }
+    }
+
+    static async createOpinion(opinion: Opinion) {
+        const sql = 'CALL crearOpinionChalet(?, ?, ?, ?, ?, ?)';
+        const values = [
+            opinion.email,
+            opinion.idChalet,
+            opinion.opinion,
+            opinion.fechaCreacion,
+            opinion.hora,
+            opinion.calificacion
+        ];
+
+        console.log(values,2345);
+        
+        try {
+            const [result]: any = await db.execute(sql, values);
+            return result;
+        } catch (error) {
+            console.error("Error al llamar al procedimiento almacenado crearOpinion:", error);
             throw error;
         }
     }

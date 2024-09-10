@@ -41,6 +41,7 @@ import cancelarReserva from './routes/cancelarReserva';
 import activarReserva from './routes/activarReserva';
 import cancelarReservaPlan from './routes/cancelarReservaPlan';
 import activarReservaPlan from './routes/activarReservaPlan';
+import crearOpinionChalet from './routes/crearOpinionChalet';
 
 const app = express();
 // Middleware para parsear JSON y formularios
@@ -87,9 +88,10 @@ app.use('/getReservasPlan', getReservasPlan);
 app.use('/getRerservasMiPlan', getReservasMiPlan);
 app.use('/getPerfilCreadorChalet', getPerfilCreadorChalet);
 app.use('/cancelarReserva', cancelarReserva);
-app.use('/activarReserva', activarReserva)
+app.use('/activarReserva', activarReserva);
 app.use('/cancelarReservaPlan', cancelarReservaPlan);
 app.use('/activarReservaPlan', activarReservaPlan);
+app.use('/crearOpinionChalet', crearOpinionChalet);
 
 const PORT = process.env.PORT || 10101;
 
