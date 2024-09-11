@@ -3,14 +3,15 @@ import chaletService from '../services/chaletService';
 
 const getOpinionChalet = async (req: Request, res: Response) => {
     try {
-        const { id_chalet } = req.body;
+        const { id } = req.params;
+        console.log(id, 3456789);
+        
 
-
-        if (!id_chalet) {
+        if (!id) {
             return res.status(400).json({ error: "El ID del chalet es requerido" });
         }
 
-        const idNumber = parseInt(id_chalet, 10);
+        const idNumber = parseInt(id, 10);
 
         if (isNaN(idNumber)) {
             return res.status(400).json({ error: "El ID debe ser un número válido" });
