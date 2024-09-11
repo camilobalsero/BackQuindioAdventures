@@ -90,6 +90,10 @@ class chaletService{
             throw error;
         }
     }
+
+    static async getOpinionChalet(chaletId:number){
+        return await chaletRepository.getOpinionChalet(chaletId);
+    }
 }
 
 export default chaletService;

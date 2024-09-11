@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import UserService from '../services/Userservice';
-import OpinionChalet from "../Dto/OpinionChaletDto";
+import OpinionPlan from "../Dto/OpinionPlanDto";
 
-const createOpinionChalet = async (req: Request, res: Response) => {
+const createOpinionPlan = async (req: Request, res: Response) => {
   try {
     const {
-      id_chalet,
+      id_plan,
       opinion,
       calificacion
     } = req.body;
@@ -17,9 +17,9 @@ const createOpinionChalet = async (req: Request, res: Response) => {
 
     const email = res.locals.user.email;
 
-    let comentario: OpinionChalet = new OpinionChalet(email, id_chalet, opinion, fecha, hora, calificacion);
+    let comentario: OpinionPlan = new OpinionPlan(email, id_plan, opinion, fecha, hora, calificacion);
 
-    await UserService.createOpinionChalet(comentario);
+    await UserService.createOpinionPlan(comentario);
 
     return res.status(201).send({ status: 'Comentario Registrado' });
 
@@ -31,4 +31,4 @@ const createOpinionChalet = async (req: Request, res: Response) => {
   }
 }
 
-export default createOpinionChalet;
+export default createOpinionPlan;

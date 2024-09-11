@@ -59,11 +59,16 @@ const io = configureSocket(server);
 handleSocketEvents(io);
 
 // Middleware para parsear JSON y formularios
+import crearOpinionPlan from './routes/crearOpinionPlan';
+import getOpinionChalet from './routes/getOpinionChalet';
+import getOpinionPlan from './routes/getOpinionPlan';
+
+
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// Registro de rutas
+
 app.use('/register', register);
 app.use('/auth', auth);
 app.use('/authAdmin', authAdmin);
@@ -107,6 +112,9 @@ app.use('/cancelarReservaPlan', cancelarReservaPlan);
 app.use('/activarReservaPlan', activarReservaPlan);
 app.use('/crearOpinionChalet', crearOpinionChalet);
 app.use('/chat', chat)
+app.use('/crearOpinionPlan', crearOpinionPlan);
+app.use('/getOpinionChalet', getOpinionChalet);
+app.use('/getOpinionPlan', getOpinionPlan);
 
 // Puerto en el que se ejecutará el servidor
 const PORT = process.env.PORT || 10101;

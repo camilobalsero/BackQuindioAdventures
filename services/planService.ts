@@ -64,6 +64,10 @@ class planService{
     static async activarPlan(id: number) {
         return await planRepository.activarPlan(id);
     }
+
+    static async getOpinionPlan(planId:number){
+        return await planRepository.getOpinionPlan(planId);
+    }
 }
 
 export default planService;

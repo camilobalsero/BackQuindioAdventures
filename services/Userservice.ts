@@ -6,7 +6,8 @@ import UpdateUser from '../Dto/UpdateUserDto';
 import bcrypt from "bcryptjs";
 import nodemailer from 'nodemailer';
 import UserRegister from '../Dto/UserRegisterDto';
-import Opinion from '../Dto/OpinionChaletDto';
+import OpinionChalet from '../Dto/OpinionChaletDto';
+import OpinionPlan from '../Dto/OpinionPlanDto'
 
 class UserService {
     
@@ -117,8 +118,12 @@ class UserService {
         }
     }
 
-    static async createOpinion(opinion: Opinion) {
-        return await UserRepository.createOpinion(opinion);
+    static async createOpinionChalet(OpinionChalet: OpinionChalet) {
+        return await UserRepository.createOpinionChalet(OpinionChalet);
+    }
+
+    static async createOpinionPlan(OpinionPlan: OpinionPlan) {
+        return await UserRepository.createOpinionPlan(OpinionPlan);
     }
 
 }

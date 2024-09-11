@@ -1,4 +1,4 @@
-class Opinion {
+class OpinionChalet {
     _email: string;
     _idChalet: number;
     _opinion: string;
@@ -45,4 +45,4 @@ class Opinion {
     set calificacion(value: number) { this._calificacion = value; }
 }
 
-export default Opinion;
+export default OpinionChalet;
