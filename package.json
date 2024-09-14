@@ -21,7 +21,7 @@
     "@types/node": "^20.12.7",
     "@types/nodemailer": "^6.4.15",
     "nodemon": "^3.1.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.2"
   },
   "dependencies": {
     "@azure/cognitiveservices-computervision": "^8.2.0",
@@ -29,6 +29,7 @@
     "@azure/storage-blob": "^12.24.0",
     "@google-cloud/language": "^6.5.0",
     "@google/generative-ai": "^0.17.1",
+    "@types/socket.io-client": "^3.0.0",
     "axios": "^1.7.5",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -36,10 +37,13 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.10.2",
     "nodemailer": "^6.9.14",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "validator": "^13.12.0"
   }
 }
