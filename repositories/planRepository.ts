@@ -145,6 +145,13 @@ class planRepository{
             throw error;
         }
     }
+
+    static async eliminarOpinion(id:number){
+        const sql = 'CALL eliminarOpinionPlan(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
 }
 
 export default planRepository;

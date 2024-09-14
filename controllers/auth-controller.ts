@@ -8,6 +8,7 @@ import UserService from "../services/Userservice";
 const authController = async (req: Request, res: Response)=> {
     try {
         const {email, password} = req.body;
+
         const result : any= await UserService.auth(new Auth(email,password));
         if (result.logged){
             return res.status(200).json({

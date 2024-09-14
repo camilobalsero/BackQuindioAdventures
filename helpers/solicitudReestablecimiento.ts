@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 const solicitarRestablecimiento = async (req: Request, res: Response) => {
     try {
         const { email } = req.body;
-        
         // Verificar si el correo está registrado en la base de datos
         const user = await UserService.getUserByEmail(email);
 

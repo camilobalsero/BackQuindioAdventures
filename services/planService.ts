@@ -68,6 +68,10 @@ class planService{
     static async getOpinionPlan(planId:number){
         return await planRepository.getOpinionPlan(planId);
     }
+
+    static async eliminarOpinion(id: number) {
+        return await planRepository.eliminarOpinion(id);
+    }
 }
 
 export default planService;

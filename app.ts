@@ -45,6 +45,8 @@ import crearOpinionChalet from './routes/crearOpinionChalet';
 import crearOpinionPlan from './routes/crearOpinionPlan';
 import getOpinionChalet from './routes/getOpinionChalet';
 import getOpinionPlan from './routes/getOpinionPlan';
+import eliminarOpinionChalet from './routes/eliminarOpinionChalet';
+import eliminarOpinionPlan from './routes/eliminarOpinionPlan';
 
 const app = express();
 
@@ -98,6 +100,8 @@ app.use('/crearOpinionChalet', crearOpinionChalet);
 app.use('/crearOpinionPlan', crearOpinionPlan);
 app.use('/getOpinionChalet', getOpinionChalet);
 app.use('/getOpinionPlan', getOpinionPlan);
+app.use('/eliminarOpinionChalet', eliminarOpinionChalet);
+app.use('/eliminarOpinionPlan', eliminarOpinionPlan)
 
 const PORT = process.env.PORT || 10101;
 

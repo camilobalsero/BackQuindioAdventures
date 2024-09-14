@@ -168,6 +168,13 @@ class chaletRepository{
         }
     }
 
+    static async eliminarOpinion(id:number){
+        const sql = 'CALL eliminarOpinionChalet(?)';
+        const values = [id]
+
+        return db.execute(sql, values);
+    }
+
 }
 
 export default chaletRepository;

@@ -94,6 +94,10 @@ class chaletService{
     static async getOpinionChalet(chaletId:number){
         return await chaletRepository.getOpinionChalet(chaletId);
     }
+
+    static async eliminarOpinion(id: number) {
+        return await chaletRepository.eliminarOpinion(id);
+    }
 }
 
 export default chaletService;

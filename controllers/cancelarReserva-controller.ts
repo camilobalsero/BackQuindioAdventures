@@ -1,3 +1,4 @@
+import sendEmail from '../services/mailerService';
 import ReservesService from '../services/reservesService';
 import { Request, Response} from "express";
 

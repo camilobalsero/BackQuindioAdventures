@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ReservesService from '../services/reservesService';
 import Reserva from '../Dto/reservesDto';
+import sendEmail from '../services/mailerService';
 
 const crearReserva = async (req: Request, res: Response) => {
     try {
@@ -52,6 +53,17 @@ const crearReserva = async (req: Request, res: Response) => {
         );
         // Insertar la reserva usando el servicio
         const reservaId = await ReservesService.createReserva(reserva);
+
+        const emailData = {
+            subject: 'Bienvenido a Quindío Adventures',
+            to: email, 
+            dataTemplate: { name:nombre },  
+            templateName: 'crearReservaChalet.html',
+          };
+      
+          // Enviar el correo usando el servicio de Azure
+          await sendEmail(emailData);
+
 
         return res.status(201).json({ status: 'Reserva creada exitosamente', reservaId });
     } catch (error) {
