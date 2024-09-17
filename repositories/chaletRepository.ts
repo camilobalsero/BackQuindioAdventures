@@ -174,7 +174,6 @@ class chaletRepository{
 
         return db.execute(sql, values);
     }
-
 }
 
 export default chaletRepository;

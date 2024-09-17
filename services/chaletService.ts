@@ -3,6 +3,7 @@ import Chalet from '../Dto/ChaletDto';
 import ChaletImages from '../Dto/ChaletImagenesDto';
 import ServiciosChalet from '../Dto/ServiciosDto';
 import chaletRepository from '../repositories/chaletRepository';
+import searchRepository from '../repositories/searchRepository';
 
 class chaletService{
     static async addChalet(chalet: Chalet) {
