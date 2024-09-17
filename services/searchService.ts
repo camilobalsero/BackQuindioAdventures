@@ -4,5 +4,8 @@ const searchBoth = async (searchTerm: string) => {
   return await SearchRepository.searchBoth(searchTerm);
 };
 
-export default searchBoth;
+export default {
+  searchBoth
+}
+;
 
