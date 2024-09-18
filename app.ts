@@ -49,6 +49,8 @@ import activarReservaPlan from './routes/activarReservaPlan';
 import crearOpinionChalet from './routes/crearOpinionChalet';
 import chat from './routes/chat'
 import search from './routes/search'
+import searchMunicipio from './routes/searchMunicipio'
+
 
 const app = express();
 const server = http.createServer(app);
@@ -121,6 +123,8 @@ app.use('/getOpinionPlan', getOpinionPlan);
 app.use('/eliminarOpinionChalet', eliminarOpinionChalet);
 app.use('/eliminarOpinionPlan', eliminarOpinionPlan);
 app.use('/search', search);
+app.use('/search/municipio', searchMunicipio);
+
 
 // Puerto en el que se ejecutará el servidor
 const PORT = process.env.PORT || 10101;
