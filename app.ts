@@ -50,6 +50,7 @@ import crearOpinionChalet from './routes/crearOpinionChalet';
 import chat from './routes/chat';
 import getFechasOcupadasChalet from './routes/getFechasOcupadasChalet';
 import getFechasOcupadasPlan from './routes/getFechasOcupadasPlan';
+import search from './routes/search'
 
 const app = express();
 const server = http.createServer(app);
@@ -123,6 +124,7 @@ app.use('/eliminarOpinionChalet', eliminarOpinionChalet);
 app.use('/eliminarOpinionPlan', eliminarOpinionPlan);
 app.use('/getFechasOcupadasChalet', getFechasOcupadasChalet);
 app.use('/getFechasOcupadasPlan', getFechasOcupadasPlan);
+app.use('/search', search);
 
 // Puerto en el que se ejecutará el servidor
 const PORT = process.env.PORT || 10101;
