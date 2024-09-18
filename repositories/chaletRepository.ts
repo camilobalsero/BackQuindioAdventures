@@ -175,6 +175,17 @@ class chaletRepository{
         return db.execute(sql, values);
     }
 
+    static async getFechasOcupadas(chaletId: number) {
+        const sql = 'SELECT fechaInicio, fechaFin FROM reservachalet WHERE id_chalet_usuario = ? AND estado = 1';
+        
+        try {
+            const [rows]: any = await db.execute(sql, [chaletId]);
+            return rows; 
+        } catch (error) {
+            console.error("Error en getFechasOcupadas:", error); 
+            throw error; 
+        }
+    }
 }
 
 export default chaletRepository;
