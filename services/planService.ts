@@ -72,6 +72,10 @@ class planService{
     static async eliminarOpinion(id: number) {
         return await planRepository.eliminarOpinion(id);
     }
+
+    static async getFechasOcupadas(id_chalet: number) {
+        return await planRepository.getFechasOcupadas(id_chalet);
+    }
 }
 
 export default planService;

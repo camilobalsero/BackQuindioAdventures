@@ -47,7 +47,9 @@ import activarReserva from './routes/activarReserva';
 import cancelarReservaPlan from './routes/cancelarReservaPlan';
 import activarReservaPlan from './routes/activarReservaPlan';
 import crearOpinionChalet from './routes/crearOpinionChalet';
-import chat from './routes/chat'
+import chat from './routes/chat';
+import getFechasOcupadasChalet from './routes/getFechasOcupadasChalet';
+import getFechasOcupadasPlan from './routes/getFechasOcupadasPlan';
 import search from './routes/search'
 import searchMunicipio from './routes/searchMunicipio'
 
@@ -122,6 +124,8 @@ app.use('/getOpinionChalet', getOpinionChalet);
 app.use('/getOpinionPlan', getOpinionPlan);
 app.use('/eliminarOpinionChalet', eliminarOpinionChalet);
 app.use('/eliminarOpinionPlan', eliminarOpinionPlan);
+app.use('/getFechasOcupadasChalet', getFechasOcupadasChalet);
+app.use('/getFechasOcupadasPlan', getFechasOcupadasPlan);
 app.use('/search', search);
 app.use('/search/municipio', searchMunicipio);
 
