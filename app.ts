@@ -50,14 +50,14 @@ import crearOpinionChalet from './routes/crearOpinionChalet';
 import chat from './routes/chat';
 import getFechasOcupadasChalet from './routes/getFechasOcupadasChalet';
 import getFechasOcupadasPlan from './routes/getFechasOcupadasPlan';
-import search from './routes/search'
-import searchMunicipio from './routes/searchMunicipio'
+import search from './routes/search';
+import searchMunicipio from './routes/searchMunicipio';
+import recommended from './routes/recommended';
 
 
 const app = express();
 const server = http.createServer(app);
 
-// Configurar Socket.io
 const io = configureSocket(server);
 
 // Manejar eventos de Socket.io (conexión, mensajes, desconexión)
@@ -128,6 +128,7 @@ app.use('/getFechasOcupadasChalet', getFechasOcupadasChalet);
 app.use('/getFechasOcupadasPlan', getFechasOcupadasPlan);
 app.use('/search', search);
 app.use('/search/municipio', searchMunicipio);
+app.use('/recommended', recommended)
 
 
 // Puerto en el que se ejecutará el servidor
