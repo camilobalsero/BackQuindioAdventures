@@ -15,7 +15,7 @@ const router = express.Router();
 const relevantKeywords = [
   "chalets", "reservas","hola", "planes vacacionales", "QuindioAdventures", 
   "servicios","cual es la misión", "cual es la visión", "cual es la mision","cual es la vision","descripcion general","descripción general","como reservar un plan vacacional","como reservar un chalet","que me puede ofrecer la pagina","quindioadventures","que puedo hacer en la pagina"
-  ,"como puedo reservar un chalet","como puedo reservar un plan vacacional","como se reserva un chalet","como se reserva un plan vacacional","que metodos de pago","como puedo pagar","como pagar","metodos de pago","como se hace una reserva","como hacer una reserva","como registro mi chalet","como registro mi plan vacacional","como registro un chalet","como registro un plan vacacional","que puedo hacer en el quindio","que puedo hacer en el Quindio","que puedo hacer en quindioadventures","que puedo hacer en QuindioAdventures","como cierro sesion en la pagina","como cierro sesión","como cerrar sesion","como cerrar sesión",""
+  ,"como puedo reservar un chalet","como puedo reservar un plan vacacional","como se reserva un chalet","como se reserva un plan vacacional","que metodos de pago","como puedo pagar","como pagar","metodos de pago","como se hace una reserva","como hacer una reserva","como registro mi chalet","como registro mi plan vacacional","como registro un chalet","como registro un plan vacacional","que puedo hacer en el quindio","que puedo hacer en el Quindio","que puedo hacer en quindioadventures","que puedo hacer en QuindioAdventures","como cierro sesion en la pagina","como cierro sesión","como cerrar sesion","como cerrar sesión"
 ];
 
 // Function to check if the question is relevant

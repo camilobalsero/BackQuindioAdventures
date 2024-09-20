@@ -4,10 +4,9 @@ import ReservesService from '../services/reservesService';
 const obtenerTarifasPlan = async (req: Request, res: Response) => {
     try {
         const { idPlan, fechaPlan } = req.body;
-
+        console.log(fechaPlan, 2345);
         // Verifica si `fechaInicio` es un string
         if (!idPlan || !fechaPlan) {
-            console.log(fechaPlan, 2345);
             return res.status(400).json({ status: "Error", message: "ID del plan y fecha de inicio requeridos" });
         }
 
@@ -22,7 +21,6 @@ const obtenerTarifasPlan = async (req: Request, res: Response) => {
         const temporada = await ReservesService.getTemporadaByFechaInicio(fechaInicioDate);
         
         // Obtener tarifas basadas en el ID del chalet y la temporada
-        console.log(temporada, 23456);
         const tarifas = await ReservesService.getTarifasByPlanAndTemporada(idPlan, temporada);
 
         res.status(200).json({

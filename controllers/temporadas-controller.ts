@@ -9,9 +9,9 @@ const obtenerTarifas = async (req: Request, res: Response) => {
             return res.status(400).json({ status: "Error", message: "ID del chalet y fecha de inicio requeridos" });
         }
 
-        // Obtener temporada por fecha de inicio
         const temporada = await ReservesService.getTemporadaByFechaInicio(new Date(fechaInicio));
-        // Obtener tarifas basadas en el ID del chalet y la temporada
+        console.log(temporada,12345);
+        
         const tarifas = await ReservesService.getTarifasByChaletAndTemporada(idChalet, temporada);
 
         res.status(200).json({
